@@ -1,8 +1,8 @@
 {
-  "name": "padua-sports-sistema",
+  "name": "podium-sistema",
   "private": true,
   "version": "0.1.0",
-  "description": "Sistema de Gestao de Eventos Esportivos - Padua Sports",
+  "description": "Podium - Sistema de Gestao de Eventos Esportivos",
   "workspaces": [
     "apps/*",
     "packages/*"

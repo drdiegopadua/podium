@@ -13,7 +13,7 @@ export function Home() {
     <PwaLayout>
       <div className="bg-ps-azul-escuro text-white rounded-b-3xl px-5 pt-8 pb-6">
         <div className="text-xl font-bold">
-          PADUA <span className="text-ps-dourado">SPORTS</span>
+          <span className="text-ps-dourado">PODIUM</span>
         </div>
         <p className="text-sm text-ps-cinza mt-1">Tecnologia que conecta competicoes</p>
       </div>

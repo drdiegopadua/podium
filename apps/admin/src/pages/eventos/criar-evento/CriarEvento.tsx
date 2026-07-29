@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Layout } from "../../../components/Layout";
 import { PageHeader } from "../../../components/PageHeader";
 import { supabase } from "../../../lib/supabaseClient";
-import { PERMISSOES_PADRAO, type Esporte, type FormatoEvento, type SorteioTipo } from "@padua-sports/shared";
+import { PERMISSOES_PADRAO, type Esporte, type FormatoEvento, type SorteioTipo } from "@podium/shared";
 
 interface FormularioEvento {
   nome: string;

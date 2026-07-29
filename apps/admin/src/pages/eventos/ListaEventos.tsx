@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import { supabase } from "../../lib/supabaseClient";
-import type { Evento } from "@padua-sports/shared";
+import type { Evento } from "@podium/shared";
 
 export function ListaEventos() {
   const [eventos, setEventos] = useState<Evento[]>([]);

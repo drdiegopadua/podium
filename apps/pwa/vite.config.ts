@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Padua Sports",
-        short_name: "Padua Sports",
+        name: "Podium",
+        short_name: "Podium",
         description: "Tecnologia que conecta competicoes",
         theme_color: "#0A2342",
         background_color: "#0A2342",

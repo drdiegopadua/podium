@@ -30,7 +30,7 @@ export function Login() {
       >
         <div className="text-center mb-2">
           <div className="text-xl font-bold text-ps-azul-escuro">
-            PADUA <span className="text-ps-dourado">SPORTS</span>
+            <span className="text-ps-dourado">PODIUM</span>
           </div>
           <p className="text-xs text-slate-500 mt-1">Painel Admin</p>
         </div>

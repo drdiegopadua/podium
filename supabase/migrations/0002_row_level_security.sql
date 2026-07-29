@@ -1,4 +1,4 @@
--- Padua Sports - Row Level Security
+-- Podium - Row Level Security
 -- RLS eh o que garante, no nivel do banco, que ninguem acesse dados fora
 -- do que o perfil permite -- mesmo que alguem tente manipular requisicoes diretamente.
 

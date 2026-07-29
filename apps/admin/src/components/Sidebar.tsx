@@ -15,7 +15,7 @@ export function Sidebar() {
     <aside className="w-64 shrink-0 bg-ps-azul-escuro text-ps-branco min-h-screen flex flex-col">
       <div className="px-6 py-8 border-b border-white/10">
         <div className="text-xl font-bold tracking-wide">
-          PADUA <span className="text-ps-dourado">SPORTS</span>
+          <span className="text-ps-dourado">PODIUM</span>
         </div>
         <div className="text-xs text-ps-cinza mt-1">Painel Admin</div>
       </div>

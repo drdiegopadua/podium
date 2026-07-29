@@ -1,4 +1,4 @@
-project_id = "padua-sports-sistema"
+project_id = "podium-sistema"
 
 [api]
 enabled = true

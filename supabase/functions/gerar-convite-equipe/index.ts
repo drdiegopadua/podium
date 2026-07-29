@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
   }
 
   return new Response(
-    JSON.stringify({ equipe: data, link_convite: `https://app.padua.sports/vincular/${codigo}` }),
+    JSON.stringify({ equipe: data, link_convite: `https://app.podium.app/vincular/${codigo}` }),
     { headers: { "Content-Type": "application/json" } }
   );
 });

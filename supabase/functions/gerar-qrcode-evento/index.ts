@@ -11,7 +11,7 @@ Deno.serve(async (req) => {
   );
 
   const codigo = crypto.randomUUID().slice(0, 8).toUpperCase();
-  const link = `https://app.padua.sports/e/${codigo}`;
+  const link = `https://app.podium.app/e/${codigo}`;
 
   const { data, error } = await supabase
     .from("eventos")

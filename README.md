@@ -1,4 +1,4 @@
-# Padua Sports — Sistema de Gestão de Eventos Esportivos
+# Podium — Sistema de Gestão de Eventos Esportivos
 
 Monorepo com painel administrativo (gestor de evento), PWA (público/equipes/atletas/árbitros) e backend Supabase.
 Estrutura completa em [docs/estrutura-sistema-eventos-esportivos.md](docs/estrutura-sistema-eventos-esportivos.md).
@@ -23,7 +23,7 @@ docs/
 
 - **Frontend:** React + Vite + TypeScript + Tailwind CSS
 - **Backend:** Supabase (Postgres + Auth + Realtime + Storage + Edge Functions)
-- **Identidade visual:** paleta Padua Sports (`#0A2342`, `#132F57`, `#D4AF37`), fonte Montserrat
+- **Identidade visual:** paleta Podium (`#0A2342`, `#132F57`, `#D4AF37`), fonte Montserrat
 
 ## Setup local
 

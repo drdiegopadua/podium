@@ -1,4 +1,4 @@
--- Padua Sports - Sistema de Gestao de Eventos Esportivos
+-- Podium - Sistema de Gestao de Eventos Esportivos
 -- Migration inicial: perfis, esportes, eventos, equipes, atletas, jogos, sumulas, classificacao
 
 -- ============================================================

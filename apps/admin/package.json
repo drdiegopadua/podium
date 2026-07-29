@@ -1,5 +1,5 @@
 {
-  "name": "@padua-sports/admin",
+  "name": "@podium/admin",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@padua-sports/shared": "*",
+    "@podium/shared": "*",
     "@supabase/supabase-js": "^2.45.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
