@@ -1,0 +1,17 @@
+{
+  "name": "padua-sports-sistema",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sistema de Gestao de Eventos Esportivos - Padua Sports",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:admin": "npm run dev -w apps/admin",
+    "dev:pwa": "npm run dev -w apps/pwa",
+    "build:admin": "npm run build -w apps/admin",
+    "build:pwa": "npm run build -w apps/pwa",
+    "build": "npm run build -w packages/shared && npm run build:admin && npm run build:pwa"
+  }
+}
