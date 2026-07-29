@@ -106,14 +106,16 @@ create table sumulas (
   status text default 'aberta' check (status in ('aberta','em_andamento','fechada')),
   fechada_por uuid references perfis(id),
   fechada_em timestamptz,
-  criado_em timestamptz default now()
+  criado_em timestamptz default now(),
+  unique (jogo_id)
 );
 
 create table estatisticas_atletas (
   id uuid primary key default gen_random_uuid(),
   sumula_id uuid references sumulas(id) on delete cascade,
   atleta_id uuid references atletas(id),
-  estatisticas jsonb not null
+  estatisticas jsonb not null,
+  unique (sumula_id, atleta_id)
 );
 
 -- ============================================================
