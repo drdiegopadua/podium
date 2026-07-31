@@ -2,6 +2,11 @@
 // Embaralha as equipes de um evento (Fisher-Yates), grava posicao_grupo e gera os jogos iniciais.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
 function fisherYates<T>(itens: T[]): T[] {
   const arr = [...itens];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -12,6 +17,10 @@ function fisherYates<T>(itens: T[]): T[] {
 }
 
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
   const { evento_id, qtd_grupos = 1 } = await req.json();
 
   const supabase = createClient(
@@ -25,7 +34,10 @@ Deno.serve(async (req) => {
     .eq("evento_id", evento_id);
 
   if (erroEquipes || !equipes) {
-    return new Response(JSON.stringify({ error: erroEquipes?.message }), { status: 400 });
+    return new Response(JSON.stringify({ error: erroEquipes?.message }), {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   const sorteadas = fisherYates(equipes);
@@ -63,12 +75,15 @@ Deno.serve(async (req) => {
 
   const { error: erroJogos } = await supabase.from("jogos").insert(novosJogos);
   if (erroJogos) {
-    return new Response(JSON.stringify({ error: erroJogos.message }), { status: 400 });
+    return new Response(JSON.stringify({ error: erroJogos.message }), {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   await supabase.from("eventos").update({ status: "sorteio_realizado" }).eq("id", evento_id);
 
   return new Response(JSON.stringify({ equipes: sorteadas, jogos_gerados: novosJogos.length }), {
-    headers: { "Content-Type": "application/json" },
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });

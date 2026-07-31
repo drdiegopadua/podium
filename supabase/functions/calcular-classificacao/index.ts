@@ -3,7 +3,16 @@
 // a partir dos jogos encerrados, e grava (upsert) na tabela classificacao.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
   const { evento_id } = await req.json();
 
   const supabase = createClient(
@@ -18,7 +27,10 @@ Deno.serve(async (req) => {
     .eq("status", "encerrado");
 
   if (erroJogos) {
-    return new Response(JSON.stringify({ error: erroJogos.message }), { status: 400 });
+    return new Response(JSON.stringify({ error: erroJogos.message }), {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   const tabela = new Map<
@@ -72,10 +84,13 @@ Deno.serve(async (req) => {
     .upsert(linhas, { onConflict: "evento_id,equipe_id" });
 
   if (erroUpsert) {
-    return new Response(JSON.stringify({ error: erroUpsert.message }), { status: 400 });
+    return new Response(JSON.stringify({ error: erroUpsert.message }), {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   return new Response(JSON.stringify({ equipes_atualizadas: linhas.length }), {
-    headers: { "Content-Type": "application/json" },
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });

@@ -2,7 +2,16 @@
 // Valida e trava a sumula (status = 'fechada'), depois dispara o recalculo de classificacao.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
   const { sumula_id, arbitro_id } = await req.json();
 
   const supabase = createClient(
@@ -19,11 +28,15 @@ Deno.serve(async (req) => {
   if (erroSumula || !sumula) {
     return new Response(JSON.stringify({ error: erroSumula?.message ?? "sumula nao encontrada" }), {
       status: 404,
+      headers: corsHeaders,
     });
   }
 
   if (sumula.status === "fechada") {
-    return new Response(JSON.stringify({ error: "sumula ja esta fechada" }), { status: 409 });
+    return new Response(JSON.stringify({ error: "sumula ja esta fechada" }), {
+      status: 409,
+      headers: corsHeaders,
+    });
   }
 
   const { error: erroUpdate } = await supabase
@@ -32,7 +45,10 @@ Deno.serve(async (req) => {
     .eq("id", sumula_id);
 
   if (erroUpdate) {
-    return new Response(JSON.stringify({ error: erroUpdate.message }), { status: 400 });
+    return new Response(JSON.stringify({ error: erroUpdate.message }), {
+      status: 400,
+      headers: corsHeaders,
+    });
   }
 
   const evento_id = (sumula as { jogos: { evento_id: string } }).jogos.evento_id;
@@ -42,6 +58,6 @@ Deno.serve(async (req) => {
   });
 
   return new Response(JSON.stringify({ ok: true }), {
-    headers: { "Content-Type": "application/json" },
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });
