@@ -4,6 +4,29 @@
 -- Idempotente: pode rodar mais de uma vez.
 
 -- ============================================================
+-- Garante chave primaria em id (bancos com tabela "jogos"/"equipes" antiga podem nao ter)
+-- ============================================================
+do $$
+declare t text;
+begin
+  foreach t in array array['jogos','equipes','eventos','atletas'] loop
+    if not exists (
+      select 1 from pg_index i
+      join pg_attribute a on a.attrelid = i.indrelid and a.attnum = any(i.indkey)
+      where i.indrelid = ('public.' || t)::regclass
+        and (i.indisprimary or i.indisunique)
+        and i.indnatts = 1 and a.attname = 'id'
+    ) then
+      if exists (select 1 from pg_constraint where conrelid = ('public.' || t)::regclass and contype = 'p') then
+        execute format('alter table public.%I add constraint %I unique (id)', t, t || '_id_unico');
+      else
+        execute format('alter table public.%I add primary key (id)', t);
+      end if;
+    end if;
+  end loop;
+end $$;
+
+-- ============================================================
 -- Jogos: estrutura de tabela e chaveamento
 -- ============================================================
 alter table jogos add column if not exists etapa text not null default 'classificatoria';
