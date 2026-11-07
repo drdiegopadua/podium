@@ -46,7 +46,7 @@ export function LoginCadastro() {
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl w-full max-w-sm p-6 space-y-4">
         <div className="text-center">
           <div className="text-xl font-bold text-ps-azul-escuro">
-            <span className="text-ps-dourado">PODIUM</span>
+            <span className="text-ps-dourado">ARENA SPORTS</span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
             {modo === "login" ? "Entrar na sua conta" : "Criar conta"}

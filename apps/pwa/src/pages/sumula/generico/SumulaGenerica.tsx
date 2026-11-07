@@ -11,7 +11,7 @@ import type {
   SumulaSchema,
   SumulaSchemaBasquete,
   SumulaSchemaVolei,
-} from "@podium/shared";
+} from "@arena/shared";
 
 interface SetPlacar {
   pontos_a: number;

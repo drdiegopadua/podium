@@ -3,7 +3,7 @@ import { Layout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import { SeletorEvento, useEventoSelecionado } from "../../components/SeletorEvento";
 import { supabase } from "../../lib/supabaseClient";
-import type { Atleta, Equipe } from "@podium/shared";
+import type { Atleta, Equipe } from "@arena/shared";
 
 interface AtletaComEquipe extends Atleta {
   equipe_nome: string;

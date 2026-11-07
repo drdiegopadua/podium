@@ -4,6 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        primaria: "var(--cor-primaria)",
+        destaque: "var(--cor-destaque)",
         "ps-azul-escuro": "#0A2342",
         "ps-azul-marinho": "#132F57",
         "ps-dourado": "#D4AF37",

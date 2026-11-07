@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Podium",
-        short_name: "Podium",
+        name: "Arena Sports",
+        short_name: "Arena",
         description: "Tecnologia que conecta competicoes",
         theme_color: "#0A2342",
         background_color: "#0A2342",

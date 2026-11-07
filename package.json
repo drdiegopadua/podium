@@ -1,8 +1,8 @@
 {
-  "name": "podium-sistema",
+  "name": "arena-sports",
   "private": true,
   "version": "0.1.0",
-  "description": "Podium - Sistema de Gestao de Eventos Esportivos",
+  "description": "Arena Sports - Sistema de Gestao de Eventos Esportivos",
   "workspaces": [
     "apps/*",
     "packages/*"

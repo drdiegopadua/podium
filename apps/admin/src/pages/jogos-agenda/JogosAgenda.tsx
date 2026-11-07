@@ -3,7 +3,7 @@ import { Layout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import { SeletorEvento, useEventoSelecionado } from "../../components/SeletorEvento";
 import { supabase } from "../../lib/supabaseClient";
-import type { Equipe, Jogo, Perfil, StatusJogo } from "@podium/shared";
+import type { Equipe, Jogo, Perfil, StatusJogo } from "@arena/shared";
 
 const STATUS_OPCOES: StatusJogo[] = ["agendado", "em_andamento", "encerrado", "wo"];
 

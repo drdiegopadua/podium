@@ -3,7 +3,7 @@ import { Layout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import { SeletorEvento, useEventoSelecionado } from "../../components/SeletorEvento";
 import { supabase } from "../../lib/supabaseClient";
-import type { Equipe } from "@podium/shared";
+import type { Equipe } from "@arena/shared";
 
 function gerarCodigoExclusivo(): string {
   return `EQP-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Layout } from "../../../components/Layout";
 import { PageHeader } from "../../../components/PageHeader";
 import { supabase } from "../../../lib/supabaseClient";
-import type { Equipe, Evento } from "@podium/shared";
+import type { Equipe, Evento } from "@arena/shared";
 
 type Fase = "configurar" | "embaralhando" | "revelado";
 
@@ -172,7 +172,7 @@ export function Sorteio() {
           >
             <div className="text-center mb-6">
               <div className="text-lg font-bold text-white">
-                <span className="text-ps-dourado">PODIUM</span>
+                <span className="text-ps-dourado">ARENA SPORTS</span>
               </div>
               <p className="text-xs text-ps-cinza mt-1">{evento.nome}</p>
             </div>

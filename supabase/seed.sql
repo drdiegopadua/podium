@@ -1,4 +1,4 @@
--- Podium - dados de seed para desenvolvimento local
+-- Arena Sports - dados de seed para desenvolvimento local
 
 insert into esportes (nome, padrao, configuracao_sumula) values
 ('Volei', true, '{

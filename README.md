@@ -1,4 +1,4 @@
-# Podium — Sistema de Gestão de Eventos Esportivos
+# Arena Sports — Sistema de Gestão de Eventos Esportivos
 
 Monorepo com painel administrativo (gestor de evento), PWA (público/equipes/atletas/árbitros) e backend Supabase.
 Estrutura completa em [docs/estrutura-sistema-eventos-esportivos.md](docs/estrutura-sistema-eventos-esportivos.md).
@@ -23,7 +23,7 @@ docs/
 
 - **Frontend:** React + Vite + TypeScript + Tailwind CSS
 - **Backend:** Supabase (Postgres + Auth + Realtime + Storage + Edge Functions)
-- **Identidade visual:** paleta Podium (`#0A2342`, `#132F57`, `#D4AF37`), fonte Montserrat
+- **Identidade visual:** paleta Arena Sports (`#0A2342`, `#132F57`, `#D4AF37`), fonte Montserrat
 
 ## Setup local
 
@@ -73,3 +73,16 @@ supabase functions deploy calcular-classificacao
 ## Próximos passos
 
 Ver seção 10 do documento de arquitetura — o motor de súmula genérico (vôlei/basquete) e a animação de sorteio ainda são stubs (`em construção`) neste scaffold inicial.
+
+## Arena Sports — modelo SaaS multi-empresa
+
+O sistema é vendido para várias empresas/organizadoras. Cada empresa:
+
+- cria a conta no painel (`/login` → "Cadastre sua empresa") e vira **proprietária**;
+- convida a equipe em **Minha empresa** (papéis: administrador, gestor de torneios, árbitro) — Edge Function `convidar-membro`;
+- cria torneios escolhendo **esporte** (padrão ou personalizado), **formato** (mata-mata, grupos + mata-mata, pontos corridos turno/returno, pontos corridos + playoffs), **qtd. de equipes**, **datas** e **regras** (pontos por vitória/empate/derrota/W.O., grupos, classificados, 3º lugar, critérios de desempate, regulamento);
+- define logo e cores, que viram o tema do app PWA nos torneios dela.
+
+O torcedor abre o torneio no PWA pelo link/QR `/e/CODIGO` (ou digitando o código). Jogos e classificação atualizam em tempo real.
+
+Isolamento entre empresas: tabelas `empresas` e `membros_empresa` + RLS (`supabase/migrations/0003_multi_empresa.sql`).

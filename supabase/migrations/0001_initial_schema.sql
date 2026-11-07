@@ -1,4 +1,4 @@
--- Podium - Sistema de Gestao de Eventos Esportivos
+-- Arena Sports - Sistema de Gestao de Eventos Esportivos
 -- Migration inicial: perfis, esportes, eventos, equipes, atletas, jogos, sumulas, classificacao
 
 -- ============================================================

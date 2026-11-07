@@ -1,5 +1,8 @@
+import type { ReactNode } from "react";
 import { Route, Routes } from "react-router-dom";
+import { RotaProtegida } from "./components/RotaProtegida";
 import { Login } from "./pages/login/Login";
+import { Onboarding } from "./pages/onboarding/Onboarding";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import { ListaEventos } from "./pages/eventos/ListaEventos";
 import { CriarEvento } from "./pages/eventos/criar-evento/CriarEvento";
@@ -11,22 +14,27 @@ import { Atletas } from "./pages/atletas/Atletas";
 import { JogosAgenda } from "./pages/jogos-agenda/JogosAgenda";
 import { Sumulas } from "./pages/sumulas/Sumulas";
 import { Classificacao } from "./pages/classificacao/Classificacao";
+import { MinhaEmpresa } from "./pages/empresa/MinhaEmpresa";
+
+const protegida = (el: ReactNode) => <RotaProtegida>{el}</RotaProtegida>;
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/eventos" element={<ListaEventos />} />
-      <Route path="/eventos/criar" element={<CriarEvento />} />
-      <Route path="/eventos/:id/editar" element={<EditarEvento />} />
-      <Route path="/eventos/:id/sorteio" element={<Sorteio />} />
-      <Route path="/eventos/configuracoes" element={<Configuracoes />} />
-      <Route path="/equipes" element={<Equipes />} />
-      <Route path="/atletas" element={<Atletas />} />
-      <Route path="/jogos-agenda" element={<JogosAgenda />} />
-      <Route path="/sumulas" element={<Sumulas />} />
-      <Route path="/classificacao" element={<Classificacao />} />
+      <Route path="/onboarding" element={protegida(<Onboarding />)} />
+      <Route path="/" element={protegida(<Dashboard />)} />
+      <Route path="/empresa" element={protegida(<MinhaEmpresa />)} />
+      <Route path="/eventos" element={protegida(<ListaEventos />)} />
+      <Route path="/eventos/criar" element={protegida(<CriarEvento />)} />
+      <Route path="/eventos/:id/editar" element={protegida(<EditarEvento />)} />
+      <Route path="/eventos/:id/sorteio" element={protegida(<Sorteio />)} />
+      <Route path="/eventos/configuracoes" element={protegida(<Configuracoes />)} />
+      <Route path="/equipes" element={protegida(<Equipes />)} />
+      <Route path="/atletas" element={protegida(<Atletas />)} />
+      <Route path="/jogos-agenda" element={protegida(<JogosAgenda />)} />
+      <Route path="/sumulas" element={protegida(<Sumulas />)} />
+      <Route path="/classificacao" element={protegida(<Classificacao />)} />
     </Routes>
   );
 }
