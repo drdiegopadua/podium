@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PwaLayout } from "../../components/PwaLayout";
+import { Escudo } from "../../components/Escudo";
 import { EntrarTorneio } from "../../components/EntrarTorneio";
 import { useTorneio } from "../../lib/torneio";
 import { dataHoraCurta, useJogos, type JogoComEquipes } from "../../lib/useJogos";
@@ -89,8 +90,8 @@ function CartaoJogo({ jogo }: { jogo: JogoComEquipes }) {
           <span>{jogo.status === "wo" ? "W.O." : "Encerrado"}</span>
         )}
       </div>
-      <Linha nome={jogo.equipe_a?.nome} placar={jogo.placar_a} mostrar={mostrar} venceu={venceu(jogo, "a")} />
-      <Linha nome={jogo.equipe_b?.nome} placar={jogo.placar_b} mostrar={mostrar} venceu={venceu(jogo, "b")} />
+      <Linha nome={jogo.equipe_a?.nome} url={jogo.equipe_a?.logo_url} placar={jogo.placar_a} mostrar={mostrar} venceu={venceu(jogo, "a")} />
+      <Linha nome={jogo.equipe_b?.nome} url={jogo.equipe_b?.logo_url} placar={jogo.placar_b} mostrar={mostrar} venceu={venceu(jogo, "b")} />
     </Link>
   );
 }
@@ -104,19 +105,24 @@ function venceu(j: JogoComEquipes, lado: "a" | "b") {
 
 function Linha({
   nome,
+  url,
   placar,
   mostrar,
   venceu,
 }: {
   nome?: string;
+  url?: string | null;
   placar?: number | null;
   mostrar: boolean;
   venceu: boolean;
 }) {
   return (
     <div className="flex justify-between items-center py-1">
-      <span className={`text-sm ${venceu ? "font-bold text-white" : "font-medium text-white/80"}`}>
-        {nome ?? "A definir"}
+      <span className="flex items-center gap-2.5 min-w-0">
+        <Escudo nome={nome} url={url} tamanho={28} />
+        <span className={`text-sm truncate ${venceu ? "font-bold text-white" : "font-medium text-white/80"}`}>
+          {nome ?? "A definir"}
+        </span>
       </span>
       {mostrar && (
         <span className={`text-xl font-extrabold tabular-nums ${venceu ? "text-destaque" : "text-white"}`}>

@@ -2,7 +2,9 @@ import { FormEvent, useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "../../../components/Layout";
 import { PageHeader } from "../../../components/PageHeader";
+import { CampoImagem } from "../../../components/CampoImagem";
 import { supabase } from "../../../lib/supabaseClient";
+import { enviarImagem } from "../../../lib/upload";
 import { useSessao } from "../../../contexts/SessaoContext";
 import {
   CRITERIOS_DESEMPATE,
@@ -115,13 +117,7 @@ export function CriarEvento() {
         esporteId = criado.id;
       }
 
-      let logo_url: string | null = null;
-      if (logo) {
-        const caminho = `${empresaAtual.id}/${Date.now()}-${logo.name}`;
-        const { error: erroUpload } = await supabase.storage.from("logos-eventos").upload(caminho, logo);
-        if (erroUpload) throw erroUpload;
-        logo_url = supabase.storage.from("logos-eventos").getPublicUrl(caminho).data.publicUrl;
-      }
+      const logo_url = logo ? await enviarImagem(logo, `${empresaAtual.id}/torneios`) : null;
 
       const codigo_evento = crypto.randomUUID().slice(0, 8).toUpperCase();
 
@@ -197,9 +193,10 @@ export function CriarEvento() {
               />
             </Campo>
           </div>
-          <Campo label="Logo do torneio">
-            <input type="file" accept="image/*" onChange={(e) => setLogo(e.target.files?.[0] ?? null)} className="text-sm" />
-          </Campo>
+          <div>
+            <span className="block text-sm font-medium text-white/80 mb-2">Logo do torneio</span>
+            <CampoImagem arquivo={logo} onChange={setLogo} rotulo="Enviar logo" />
+          </div>
         </Secao>
 
         <Secao numero={2} titulo="Esporte">

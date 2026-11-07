@@ -33,7 +33,9 @@ export function ListaEventos() {
             <div className="text-xs uppercase tracking-wide text-destaque font-semibold">
               {evento.status.replace(/_/g, " ")}
             </div>
-            <div className="text-lg font-bold text-white mt-1">{evento.nome}</div>
+            <Link to={`/eventos/${evento.id}/editar`} className="block text-lg font-bold text-white mt-1 hover:text-destaque">
+              {evento.nome}
+            </Link>
             <div className="text-sm text-cinza">
               {evento.cidade} · {new Date(evento.data_inicio + "T12:00").toLocaleDateString("pt-BR")}
             </div>

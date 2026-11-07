@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import type { Classificacao as LinhaClassificacao } from "@arena/shared";
 import { PwaLayout } from "../../components/PwaLayout";
+import { Escudo } from "../../components/Escudo";
 import { EntrarTorneio } from "../../components/EntrarTorneio";
 import { supabase } from "../../lib/supabaseClient";
 import { useTorneio } from "../../lib/torneio";
 
 interface Linha extends LinhaClassificacao {
-  equipe: { nome: string } | null;
+  equipe: { nome: string; logo_url?: string | null } | null;
 }
 
 export function Classificacao() {
@@ -19,7 +20,7 @@ export function Classificacao() {
     const carregar = () =>
       supabase
         .from("classificacao")
-        .select("*, equipe:equipes(nome)")
+        .select("*, equipe:equipes(nome, logo_url)")
         .eq("evento_id", torneio.id)
         .order("grupo", { ascending: true })
         .order("pontos", { ascending: false })
@@ -83,8 +84,11 @@ export function Classificacao() {
                   .map((l, i) => (
                     <tr key={l.id} className="border-t border-borda">
                       <td className="px-4 py-2">
-                        <span className="text-cinza mr-2">{i + 1}</span>
-                        {l.equipe?.nome}
+                        <span className="flex items-center gap-2.5">
+                          <span className={`w-4 text-xs ${i < 2 ? "text-destaque font-bold" : "text-cinza"}`}>{i + 1}</span>
+                          <Escudo nome={l.equipe?.nome} url={l.equipe?.logo_url} tamanho={26} />
+                          <span className="truncate">{l.equipe?.nome}</span>
+                        </span>
                       </td>
                       <td className="text-center font-bold text-white">{l.pontos}</td>
                       <td className="text-center">{l.vitorias}</td>

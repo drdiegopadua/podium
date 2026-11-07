@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FORMATOS_EVENTO } from "@arena/shared";
 import { PwaLayout } from "../components/PwaLayout";
+import { Escudo } from "../components/Escudo";
 import { EntrarTorneio } from "../components/EntrarTorneio";
 import { useTorneio, type TorneioCompleto } from "../lib/torneio";
 import { dataHoraCurta, useJogos, type JogoComEquipes } from "../lib/useJogos";
@@ -11,7 +12,6 @@ import {
   IconePessoas,
   IconeSeta,
   IconeSino,
-  IconeTrofeu,
 } from "../components/Icones";
 
 export function Home() {
@@ -139,8 +139,9 @@ function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
                   to={`/sumula/${j.id}`}
                   className="flex items-center gap-3 rounded-2xl bg-cartao border border-borda p-3"
                 >
-                  <div className="w-11 h-11 shrink-0 rounded-xl bg-cartao-2 flex items-center justify-center text-destaque">
-                    <IconeTrofeu tamanho={20} />
+                  <div className="relative w-12 h-11 shrink-0">
+                    <Escudo nome={j.equipe_a?.nome} url={j.equipe_a?.logo_url} tamanho={30} className="absolute left-0 top-0" />
+                    <Escudo nome={j.equipe_b?.nome} url={j.equipe_b?.logo_url} tamanho={30} className="absolute right-0 bottom-0 ring-2 ring-cartao" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-semibold truncate">
@@ -183,8 +184,8 @@ function CartaoJogo({ jogo, principal }: { jogo: JogoComEquipes; principal: bool
         )}
       </div>
       <div className="mt-4 space-y-2">
-        <LinhaPlacar nome={jogo.equipe_a?.nome} placar={aoVivo ? jogo.placar_a : null} />
-        <LinhaPlacar nome={jogo.equipe_b?.nome} placar={aoVivo ? jogo.placar_b : null} />
+        <LinhaPlacar nome={jogo.equipe_a?.nome} url={jogo.equipe_a?.logo_url} placar={aoVivo ? jogo.placar_a : null} />
+        <LinhaPlacar nome={jogo.equipe_b?.nome} url={jogo.equipe_b?.logo_url} placar={aoVivo ? jogo.placar_b : null} />
       </div>
       {jogo.local && <div className="mt-3 text-xs opacity-70">{jogo.local}</div>}
       <span
@@ -198,10 +199,13 @@ function CartaoJogo({ jogo, principal }: { jogo: JogoComEquipes; principal: bool
   );
 }
 
-function LinhaPlacar({ nome, placar }: { nome?: string; placar?: number | null }) {
+function LinhaPlacar({ nome, url, placar }: { nome?: string; url?: string | null; placar?: number | null }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-lg font-bold leading-tight truncate">{nome ?? "A definir"}</span>
+      <span className="flex items-center gap-2.5 min-w-0">
+        <Escudo nome={nome} url={url} tamanho={34} />
+        <span className="text-lg font-bold leading-tight truncate">{nome ?? "A definir"}</span>
+      </span>
       {placar != null && <span className="text-2xl font-extrabold tabular-nums">{placar}</span>}
     </div>
   );
