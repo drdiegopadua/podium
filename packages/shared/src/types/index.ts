@@ -29,6 +29,7 @@ export interface Empresa {
   cor_secundaria: string;
   plano: PlanoEmpresa;
   limite_torneios?: number | null;
+  plano_valido_ate?: string | null;
   ativo: boolean;
   criado_em: string;
 }
@@ -253,6 +254,7 @@ export interface Classificacao {
 }
 
 export * from "../campeonato";
+export * from "../planos";
 
 export * from "../permissions";
 export * from "../sumula-schemas";

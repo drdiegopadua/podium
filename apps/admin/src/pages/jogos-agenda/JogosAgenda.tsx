@@ -242,6 +242,16 @@ export function JogosAgenda() {
             {realizados} de {jogos.length} jogos realizados
           </div>
         )}
+        {evento && (
+          <a
+            href={`/imprimir/${evento.id}?doc=tabela`}
+            target="_blank"
+            rel="noreferrer"
+            className="ml-auto rounded-full border border-borda px-4 py-2 text-sm font-semibold hover:border-destaque"
+          >
+            🖨 Imprimir / PDF
+          </a>
+        )}
       </div>
 
       {erro && <p className="text-sm text-ps-vermelho mb-4">{erro}</p>}

@@ -73,8 +73,18 @@ export function Classificacao() {
   return (
     <Layout>
       <PageHeader title="Classificação" subtitle="Atualizada automaticamente a cada resultado lançado" />
-      <div className="mb-6">
+      <div className="mb-6 flex flex-wrap items-center gap-4">
         <SeletorEvento eventos={eventos} eventoId={eventoId} onChange={setEventoId} />
+        {eventoId && (
+          <a
+            href={`/imprimir/${eventoId}?doc=classificacao`}
+            target="_blank"
+            rel="noreferrer"
+            className="ml-auto rounded-full border border-borda px-4 py-2 text-sm font-semibold hover:border-destaque"
+          >
+            🖨 Imprimir / PDF
+          </a>
+        )}
       </div>
 
       {carregando && <p className="text-sm text-cinza">Carregando...</p>}

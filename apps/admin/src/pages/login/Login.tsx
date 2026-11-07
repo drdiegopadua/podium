@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
 import { useSessao } from "../../contexts/SessaoContext";
 
@@ -8,7 +8,8 @@ type Modo = "entrar" | "cadastrar" | "recuperar";
 export function Login() {
   const navigate = useNavigate();
   const { sessao, carregando: carregandoSessao, recarregar } = useSessao();
-  const [modo, setModo] = useState<Modo>("entrar");
+  const [params] = useSearchParams();
+  const [modo, setModo] = useState<Modo>(params.get("cadastro") ? "cadastrar" : "entrar");
   const [nome, setNome] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -74,7 +75,9 @@ export function Login() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-fundo">
       <div className="hidden lg:flex flex-col justify-between p-12 text-white">
-        <Marca />
+        <Link to="/" aria-label="Conheça o Arena Sports">
+          <Marca />
+        </Link>
         <div>
           <h1 className="text-4xl font-bold leading-tight">
             Crie e gerencie seus torneios <span className="text-destaque">em minutos.</span>

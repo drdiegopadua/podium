@@ -361,6 +361,14 @@ export function ModalResultado({
         {erro && <p className="text-sm text-ps-vermelho">{erro}</p>}
 
         <div className="flex justify-end gap-3">
+          <a
+            href={`/imprimir/${evento.id}?doc=sumula&jogo=${jogo.id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mr-auto rounded-full border border-borda px-5 py-2.5 text-sm"
+          >
+            🖨 Súmula
+          </a>
           <button onClick={onFechar} className="rounded-full border border-borda px-5 py-2.5 text-sm">
             Cancelar
           </button>

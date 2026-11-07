@@ -13,6 +13,7 @@ const links = [
   { to: "/mural", label: "Mural" },
   { to: "/patrocinadores", label: "Patrocinadores" },
   { to: "/empresa", label: "Minha empresa" },
+  { to: "/plano", label: "Meu plano" },
 ];
 
 const PAPEIS: Record<string, string> = {
@@ -49,7 +50,7 @@ export function Sidebar() {
         {papelAtual && <div className="text-xs text-cinza mt-0.5">{PAPEIS[papelAtual]}</div>}
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">
-        {links.map((link) => (
+        {[...links, ...(perfil?.tipo === "super_admin" ? [{ to: "/plataforma", label: "★ Plataforma" }] : [])].map((link) => (
           <NavLink
             key={link.to}
             to={link.to}

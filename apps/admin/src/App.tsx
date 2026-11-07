@@ -18,6 +18,11 @@ import { MinhaEmpresa } from "./pages/empresa/MinhaEmpresa";
 import { Artes } from "./pages/divulgacao/Artes";
 import { Mural } from "./pages/divulgacao/Mural";
 import { Patrocinadores } from "./pages/divulgacao/Patrocinadores";
+import { MeuPlano } from "./pages/plano/MeuPlano";
+import { Plataforma } from "./pages/plataforma/Plataforma";
+import { Site } from "./pages/site/Site";
+import { Imprimir } from "./pages/imprimir/Imprimir";
+import { useSessao } from "./contexts/SessaoContext";
 
 const protegida = (el: ReactNode) => <RotaProtegida>{el}</RotaProtegida>;
 
@@ -26,7 +31,11 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/onboarding" element={protegida(<Onboarding />)} />
-      <Route path="/" element={protegida(<Dashboard />)} />
+      <Route path="/" element={<Inicio />} />
+      <Route path="/conheca" element={<Site />} />
+      <Route path="/plano" element={protegida(<MeuPlano />)} />
+      <Route path="/plataforma" element={protegida(<Plataforma />)} />
+      <Route path="/imprimir/:id" element={protegida(<Imprimir />)} />
       <Route path="/empresa" element={protegida(<MinhaEmpresa />)} />
       <Route path="/eventos" element={protegida(<ListaEventos />)} />
       <Route path="/eventos/criar" element={protegida(<CriarEvento />)} />
@@ -43,4 +52,11 @@ export default function App() {
       <Route path="/patrocinadores" element={protegida(<Patrocinadores />)} />
     </Routes>
   );
+}
+
+/** Visitante ve o site de apresentacao; quem esta logado vai para o painel. */
+function Inicio() {
+  const { sessao, carregando } = useSessao();
+  if (!carregando && !sessao) return <Site />;
+  return protegida(<Dashboard />);
 }

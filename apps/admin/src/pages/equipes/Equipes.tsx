@@ -108,7 +108,10 @@ export function Equipes() {
         <SeletorEvento eventos={eventos} eventoId={eventoId} onChange={setEventoId} />
         {eventoAtual && (
           <p className="text-xs text-cinza mt-2">
-            {equipes.length} de {eventoAtual.qtd_equipes} equipes cadastradas
+            {equipes.length} de {eventoAtual.qtd_equipes} equipes cadastradas ·{" "}
+            <a href={`/imprimir/${eventoAtual.id}?doc=elenco`} target="_blank" rel="noreferrer" className="text-destaque underline">
+              🖨 Imprimir elencos
+            </a>
           </p>
         )}
       </div>
