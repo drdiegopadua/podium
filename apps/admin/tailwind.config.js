@@ -4,17 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        "ps-azul-escuro": "#0A2342",
-        "ps-azul-marinho": "#132F57",
-        "ps-dourado": "#D4AF37",
-        "ps-branco": "#FFFFFF",
-        "ps-cinza-claro": "#F5F7FA",
-        "ps-cinza": "#CBD5E1",
+        // Tema escuro Arena Sports (mesmo visual do app PWA)
+        fundo: "#0B0B0C",
+        cartao: "#161618",
+        "cartao-2": "#1F1F23",
+        borda: "#26262B",
+        cinza: "#8B8B94",
+        preto: "#0B0B0C",
+        destaque: "#D4FF3A",
         "ps-verde": "#22C55E",
-        "ps-vermelho": "#EF4444",
+        "ps-vermelho": "#FF5A5F",
       },
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Oswald", "Inter", "sans-serif"],
       },
     },
   },

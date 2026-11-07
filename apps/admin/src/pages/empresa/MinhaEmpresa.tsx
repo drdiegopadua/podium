@@ -29,7 +29,7 @@ export function MinhaEmpresa() {
   const { empresaAtual, papelAtual, sessao, recarregar } = useSessao();
   const podeEditar = papelAtual === "dono" || papelAtual === "admin";
 
-  const [dados, setDados] = useState({ nome: "", cor_primaria: "#0A2342", cor_secundaria: "#D4AF37" });
+  const [dados, setDados] = useState({ nome: "", cor_primaria: "#0B0B0C", cor_secundaria: "#D4FF3A" });
   const [logo, setLogo] = useState<File | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [salvando, setSalvando] = useState(false);
@@ -114,10 +114,10 @@ export function MinhaEmpresa() {
       <PageHeader title="Minha empresa" subtitle={`Plano: ${PLANOS[empresaAtual.plano] ?? empresaAtual.plano}`} />
 
       <div className="grid lg:grid-cols-2 gap-6 max-w-5xl">
-        <form onSubmit={salvar} className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 space-y-4">
-          <h2 className="font-bold text-ps-azul-escuro">Identidade</h2>
+        <form onSubmit={salvar} className="bg-cartao rounded-2xl shadow-sm border border-borda p-6 space-y-4">
+          <h2 className="font-bold text-white">Identidade</h2>
           <label className="block">
-            <span className="block text-sm font-medium text-slate-700 mb-1">Nome</span>
+            <span className="block text-sm font-medium text-white/80 mb-1">Nome</span>
             <input
               disabled={!podeEditar}
               required
@@ -128,7 +128,7 @@ export function MinhaEmpresa() {
           </label>
           <div className="grid grid-cols-2 gap-4">
             <label className="block">
-              <span className="block text-sm font-medium text-slate-700 mb-1">Cor principal</span>
+              <span className="block text-sm font-medium text-white/80 mb-1">Cor principal</span>
               <input
                 type="color"
                 disabled={!podeEditar}
@@ -138,7 +138,7 @@ export function MinhaEmpresa() {
               />
             </label>
             <label className="block">
-              <span className="block text-sm font-medium text-slate-700 mb-1">Cor de destaque</span>
+              <span className="block text-sm font-medium text-white/80 mb-1">Cor de destaque</span>
               <input
                 type="color"
                 disabled={!podeEditar}
@@ -149,7 +149,7 @@ export function MinhaEmpresa() {
             </label>
           </div>
           <label className="block">
-            <span className="block text-sm font-medium text-slate-700 mb-1">Logo</span>
+            <span className="block text-sm font-medium text-white/80 mb-1">Logo</span>
             {empresaAtual.logo_url && (
               <img src={empresaAtual.logo_url} alt="" className="h-12 mb-2 object-contain" />
             )}
@@ -161,23 +161,23 @@ export function MinhaEmpresa() {
               className="text-sm"
             />
           </label>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-cinza">
             As cores e o logo aparecem no app dos torcedores nos torneios da sua empresa.
           </p>
-          {msg && <p className="text-sm text-slate-600">{msg}</p>}
+          {msg && <p className="text-sm text-white/80">{msg}</p>}
           {podeEditar && (
             <button
               disabled={salvando}
-              className="rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-5 py-2 text-sm disabled:opacity-60"
+              className="rounded-full bg-destaque text-preto font-semibold px-5 py-2 text-sm disabled:opacity-60"
             >
               {salvando ? "Salvando..." : "Salvar"}
             </button>
           )}
         </form>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 space-y-4">
-          <h2 className="font-bold text-ps-azul-escuro">Equipe</h2>
-          <ul className="divide-y divide-slate-100">
+        <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-6 space-y-4">
+          <h2 className="font-bold text-white">Equipe</h2>
+          <ul className="divide-y divide-borda">
             {membros.map((m) => (
               <li key={m.perfil_id} className="py-2 flex items-center justify-between text-sm">
                 <div>
@@ -185,7 +185,7 @@ export function MinhaEmpresa() {
                     {m.perfil?.nome ?? "—"}
                     {m.perfil_id === sessao?.user.id && " (você)"}
                   </div>
-                  <div className="text-xs text-slate-500">{PAPEIS[m.papel]}</div>
+                  <div className="text-xs text-cinza">{PAPEIS[m.papel]}</div>
                 </div>
                 {podeEditar && m.papel !== "dono" && m.perfil_id !== sessao?.user.id && (
                   <button onClick={() => remover(m.perfil_id)} className="text-xs text-ps-vermelho underline">
@@ -197,8 +197,8 @@ export function MinhaEmpresa() {
           </ul>
 
           {podeEditar && (
-            <form onSubmit={convidar} className="space-y-3 border-t border-slate-100 pt-4">
-              <h3 className="text-sm font-semibold text-slate-700">Adicionar pessoa</h3>
+            <form onSubmit={convidar} className="space-y-3 border-t border-borda pt-4">
+              <h3 className="text-sm font-semibold text-white/80">Adicionar pessoa</h3>
               <input
                 required
                 type="email"
@@ -222,8 +222,8 @@ export function MinhaEmpresa() {
                 <option value="gestor">{PAPEIS.gestor}</option>
                 <option value="arbitro">{PAPEIS.arbitro}</option>
               </select>
-              {msgConvite && <p className="text-sm text-slate-600">{msgConvite}</p>}
-              <button className="rounded-lg bg-ps-azul-escuro text-white font-semibold px-4 py-2 text-sm">
+              {msgConvite && <p className="text-sm text-white/80">{msgConvite}</p>}
+              <button className="rounded-lg bg-cartao-2 text-white border border-borda font-semibold px-4 py-2 text-sm">
                 Convidar
               </button>
             </form>

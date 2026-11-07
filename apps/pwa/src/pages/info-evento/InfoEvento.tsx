@@ -19,7 +19,7 @@ export function InfoEvento() {
   if (codigoEvento || carregando) {
     return (
       <PwaLayout>
-        <p className="p-8 text-center text-sm text-slate-500">Abrindo torneio...</p>
+        <p className="p-8 text-center text-sm text-cinza">Abrindo torneio...</p>
       </PwaLayout>
     );
   }
@@ -40,8 +40,8 @@ export function InfoEvento() {
   return (
     <PwaLayout>
       <div className="p-5 space-y-4">
-        <h1 className="text-lg font-bold text-primaria">{torneio.nome}</h1>
-        {torneio.descricao && <p className="text-sm text-slate-600">{torneio.descricao}</p>}
+        <h1 className="text-lg font-bold text-white">{torneio.nome}</h1>
+        {torneio.descricao && <p className="text-sm text-white/80">{torneio.descricao}</p>}
 
         <Cartao titulo="Informações">
           <Linha rotulo="Organização" valor={torneio.empresa?.nome} />
@@ -63,7 +63,7 @@ export function InfoEvento() {
           ) : null}
           {r.classificados_playoff ? <Linha rotulo="Playoffs" valor={`${r.classificados_playoff} melhores`} /> : null}
           {r.criterios_desempate && r.criterios_desempate.length > 0 && (
-            <div className="pt-2 text-xs text-slate-500">
+            <div className="pt-2 text-xs text-cinza">
               Desempate:{" "}
               {r.criterios_desempate
                 .map((c, i) => `${i + 1}º ${CRITERIOS_DESEMPATE.find((x) => x.valor === c)?.rotulo ?? c}`)
@@ -74,11 +74,11 @@ export function InfoEvento() {
 
         {r.observacoes && (
           <Cartao titulo="Regulamento">
-            <p className="text-sm text-slate-600 whitespace-pre-line">{r.observacoes}</p>
+            <p className="text-sm text-white/80 whitespace-pre-line">{r.observacoes}</p>
           </Cartao>
         )}
 
-        <p className="text-center text-xs text-slate-400">
+        <p className="text-center text-xs text-cinza">
           Código do torneio: <span className="font-mono">{torneio.codigo_evento}</span>
         </p>
       </div>
@@ -88,9 +88,9 @@ export function InfoEvento() {
 
 function Cartao({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <section className="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-      <h2 className="text-sm font-bold text-primaria mb-2">{titulo}</h2>
-      <div className="divide-y divide-slate-50">{children}</div>
+    <section className="bg-cartao rounded-2xl shadow-sm border border-borda p-4">
+      <h2 className="text-sm font-bold text-white mb-2">{titulo}</h2>
+      <div className="divide-y divide-borda">{children}</div>
     </section>
   );
 }
@@ -98,8 +98,8 @@ function Cartao({ titulo, children }: { titulo: string; children: React.ReactNod
 function Linha({ rotulo, valor }: { rotulo: string; valor?: string | null }) {
   return (
     <div className="flex justify-between gap-4 py-1.5 text-sm">
-      <span className="text-slate-500">{rotulo}</span>
-      <span className="text-right font-medium text-slate-800">{valor || "—"}</span>
+      <span className="text-cinza">{rotulo}</span>
+      <span className="text-right font-medium text-white">{valor || "—"}</span>
     </div>
   );
 }

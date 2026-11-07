@@ -47,7 +47,7 @@ export function SeletorEvento({
   onChange: (id: string) => void;
 }) {
   if (eventos.length === 0) {
-    return <p className="text-sm text-slate-500">Nenhum torneio criado ainda.</p>;
+    return <p className="text-sm text-cinza">Nenhum torneio criado ainda.</p>;
   }
 
   return (

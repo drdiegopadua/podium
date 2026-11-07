@@ -175,7 +175,7 @@ export function SumulaGenerica() {
   if (carregando) {
     return (
       <PwaLayout>
-        <div className="p-5 text-sm text-slate-500">Carregando sumula...</div>
+        <div className="p-5 text-sm text-cinza">Carregando sumula...</div>
       </PwaLayout>
     );
   }
@@ -195,8 +195,8 @@ export function SumulaGenerica() {
     <PwaLayout>
       <div className="p-5 space-y-6">
         <div>
-          <h1 className="text-lg font-bold text-ps-azul-escuro">{esporte.nome}</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="text-lg font-bold text-white">{esporte.nome}</h1>
+          <p className="text-sm text-cinza">
             {equipeA.nome} x {equipeB.nome}
           </p>
           {fechada && (
@@ -298,20 +298,20 @@ function ContadorPlacar({
 }) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="text-xs font-medium text-slate-500 truncate max-w-[7rem]">{label}</span>
-      <span className="text-4xl font-bold text-ps-azul-escuro">{valor}</span>
+      <span className="text-xs font-medium text-cinza truncate max-w-[7rem]">{label}</span>
+      <span className="text-4xl font-bold text-white">{valor}</span>
       <div className="flex gap-2">
         <button
           disabled={desabilitado}
           onClick={onMenos}
-          className="w-9 h-9 rounded-full bg-ps-cinza-claro text-ps-azul-escuro font-bold disabled:opacity-40"
+          className="w-9 h-9 rounded-full bg-fundo text-white font-bold disabled:opacity-40"
         >
           −
         </button>
         <button
           disabled={desabilitado}
           onClick={onMais}
-          className="w-9 h-9 rounded-full bg-ps-dourado text-ps-azul-escuro font-bold disabled:opacity-40"
+          className="w-9 h-9 rounded-full bg-destaque text-preto font-bold disabled:opacity-40"
         >
           +
         </button>
@@ -384,8 +384,8 @@ function PlacarVolei({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-      <div className="text-center text-xs text-slate-500 mb-3">
+    <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-5">
+      <div className="text-center text-xs text-cinza mb-3">
         Set {setAtual + 1} de {schema.sets.quantidade_max} — sets: {setsVencidosA} x {setsVencidosB}
       </div>
       <div className="grid grid-cols-2 gap-6">
@@ -428,15 +428,15 @@ function PlacarPeriodos({
   const placarB = dados.placar_b ?? 0;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+    <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-5">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs text-slate-500">
+        <span className="text-xs text-cinza">
           Periodo {periodoAtual} de {schema.periodos}
         </span>
         {!desabilitado && periodoAtual < schema.periodos && (
           <button
             onClick={() => onAlterar({ ...dados, periodo_atual: periodoAtual + 1 })}
-            className="text-xs text-ps-azul-marinho underline"
+            className="text-xs text-destaque underline"
           >
             Proximo periodo
           </button>
@@ -479,7 +479,7 @@ function PlacarSimples({
   const placarB = dados.placar_b ?? 0;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+    <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-5">
       <div className="grid grid-cols-2 gap-6">
         <ContadorPlacar
           label={equipeA}
@@ -518,12 +518,12 @@ function TabelaEstatisticas({
   if (atletas.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
-      <h2 className="text-sm font-semibold text-ps-azul-escuro mb-3">{titulo}</h2>
+    <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-4">
+      <h2 className="text-sm font-semibold text-white mb-3">{titulo}</h2>
       <div className="overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
-            <tr className="text-slate-400 text-left">
+            <tr className="text-cinza text-left">
               <th className="pb-2 pr-2">Atleta</th>
               {campos.map((campo) => (
                 <th key={campo} className="pb-2 px-1 text-center capitalize">
@@ -534,8 +534,8 @@ function TabelaEstatisticas({
           </thead>
           <tbody>
             {atletas.map((atleta) => (
-              <tr key={atleta.id} className="border-t border-slate-100">
-                <td className="py-2 pr-2 font-medium text-ps-azul-escuro whitespace-nowrap">
+              <tr key={atleta.id} className="border-t border-borda">
+                <td className="py-2 pr-2 font-medium text-white whitespace-nowrap">
                   #{atleta.numero_camisa ?? "-"}
                 </td>
                 {campos.map((campo) => {
@@ -546,7 +546,7 @@ function TabelaEstatisticas({
                         <button
                           disabled={desabilitado}
                           onClick={() => onAlterar(atleta.id, campo, -1)}
-                          className="w-6 h-6 rounded-full bg-ps-cinza-claro text-ps-azul-escuro disabled:opacity-40"
+                          className="w-6 h-6 rounded-full bg-fundo text-white disabled:opacity-40"
                         >
                           −
                         </button>
@@ -554,7 +554,7 @@ function TabelaEstatisticas({
                         <button
                           disabled={desabilitado}
                           onClick={() => onAlterar(atleta.id, campo, 1)}
-                          className="w-6 h-6 rounded-full bg-ps-dourado text-ps-azul-escuro disabled:opacity-40"
+                          className="w-6 h-6 rounded-full bg-destaque text-preto disabled:opacity-40"
                         >
                           +
                         </button>

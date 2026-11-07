@@ -5,7 +5,7 @@ export function StubPage({ titulo, descricao }: { titulo: string; descricao: str
   return (
     <Layout>
       <PageHeader title={titulo} subtitle={descricao} />
-      <div className="bg-white rounded-xl border border-dashed border-ps-cinza p-10 text-center text-sm text-slate-400">
+      <div className="bg-cartao rounded-2xl border border-dashed border-borda p-10 text-center text-sm text-cinza">
         Em construcao.
       </div>
     </Layout>

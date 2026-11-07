@@ -53,16 +53,16 @@ export function Dashboard() {
           <Link
             key={c.titulo}
             to={c.href}
-            className="bg-white rounded-xl shadow-sm border border-slate-100 p-5 hover:shadow-md transition-shadow"
+            className="bg-cartao rounded-2xl shadow-sm border border-borda p-5 hover:shadow-md transition-shadow"
           >
-            <div className="text-sm text-slate-500">{c.titulo}</div>
-            <div className="text-3xl font-bold text-ps-azul-escuro mt-2">{c.valor}</div>
+            <div className="text-sm text-cinza">{c.titulo}</div>
+            <div className="text-3xl font-bold text-white mt-2">{c.valor}</div>
           </Link>
         ))}
       </div>
       <Link
         to="/eventos/criar"
-        className="inline-block rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-5 py-2.5 text-sm hover:brightness-95"
+        className="inline-block rounded-full bg-destaque text-preto font-semibold px-5 py-2.5 text-sm hover:brightness-95"
       >
         + Criar novo torneio
       </Link>

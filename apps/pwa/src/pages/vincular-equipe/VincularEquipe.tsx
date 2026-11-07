@@ -43,11 +43,11 @@ export function VincularEquipe() {
   }
 
   return (
-    <div className="min-h-screen bg-ps-azul-escuro flex items-center justify-center p-6">
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl w-full max-w-sm p-6 space-y-4">
+    <div className="min-h-screen bg-fundo flex items-center justify-center p-6">
+      <form onSubmit={handleSubmit} className="bg-cartao rounded-2xl w-full max-w-sm p-6 space-y-4">
         <div className="text-center">
-          <div className="text-xl font-bold text-ps-azul-escuro">Vincular a equipe</div>
-          <p className="text-xs text-slate-500 mt-1">
+          <div className="text-xl font-bold text-white">Vincular a equipe</div>
+          <p className="text-xs text-cinza mt-1">
             Peca o codigo exclusivo ao capitao da sua equipe
           </p>
         </div>
@@ -65,11 +65,11 @@ export function VincularEquipe() {
         <button
           type="submit"
           disabled={carregando}
-          className="w-full rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold py-2.5 text-sm hover:brightness-95 disabled:opacity-60"
+          className="w-full rounded-full bg-destaque text-preto font-semibold py-3.5 text-sm hover:brightness-95 disabled:opacity-60"
         >
           {carregando ? "Vinculando..." : "Vincular"}
         </button>
-        <p className="text-xs text-slate-400 text-center">
+        <p className="text-xs text-cinza text-center">
           Seu vinculo ficara pendente ate aprovacao do capitao ou gestor.
         </p>
       </form>

@@ -94,7 +94,7 @@ export function Sorteio() {
   if (carregando) {
     return (
       <Layout>
-        <p className="text-sm text-slate-500">Carregando...</p>
+        <p className="text-sm text-cinza">Carregando...</p>
       </Layout>
     );
   }
@@ -114,12 +114,12 @@ export function Sorteio() {
       {erro && <p className="text-sm text-ps-vermelho mb-4">{erro}</p>}
 
       {fase === "configurar" && (
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 max-w-lg space-y-4">
-          <p className="text-sm text-slate-600">
+        <div className="bg-cartao rounded-2xl shadow-sm border border-borda p-6 max-w-lg space-y-4">
+          <p className="text-sm text-white/80">
             {equipes.length} equipes inscritas. Escolha em quantos grupos elas serao divididas.
           </p>
           <label className="block">
-            <span className="block text-sm font-medium text-slate-700 mb-1">Quantidade de grupos</span>
+            <span className="block text-sm font-medium text-white/80 mb-1">Quantidade de grupos</span>
             <input
               type="number"
               min={1}
@@ -132,19 +132,19 @@ export function Sorteio() {
           <button
             onClick={iniciarSorteio}
             disabled={sorteando || equipes.length < 2}
-            className="rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-5 py-2.5 text-sm hover:brightness-95 disabled:opacity-60"
+            className="rounded-full bg-destaque text-preto font-semibold px-5 py-2.5 text-sm hover:brightness-95 disabled:opacity-60"
           >
             Iniciar sorteio
           </button>
           {equipes.length < 2 && (
-            <p className="text-xs text-slate-400">E preciso pelo menos 2 equipes para sortear.</p>
+            <p className="text-xs text-cinza">E preciso pelo menos 2 equipes para sortear.</p>
           )}
         </div>
       )}
 
       {fase === "embaralhando" && (
-        <div className="bg-ps-azul-escuro rounded-2xl p-8">
-          <p className="text-center text-ps-dourado text-sm font-semibold uppercase tracking-widest mb-6">
+        <div className="bg-fundo rounded-2xl p-8">
+          <p className="text-center text-destaque text-sm font-semibold uppercase tracking-widest mb-6">
             Sorteando...
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -154,7 +154,7 @@ export function Sorteio() {
                   key={equipe.id}
                   layout
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className="bg-white rounded-lg px-3 py-4 text-center text-xs font-semibold text-ps-azul-escuro"
+                  className="bg-cartao rounded-lg px-3 py-4 text-center text-xs font-semibold text-white"
                 >
                   {equipe.nome}
                 </motion.div>
@@ -168,13 +168,13 @@ export function Sorteio() {
         <div className="space-y-6">
           <div
             id="tela-final-sorteio"
-            className="bg-ps-azul-escuro rounded-2xl p-8 max-w-md mx-auto aspect-[4/5] flex flex-col"
+            className="bg-fundo rounded-2xl p-8 max-w-md mx-auto aspect-[4/5] flex flex-col"
           >
             <div className="text-center mb-6">
               <div className="text-lg font-bold text-white">
-                <span className="text-ps-dourado">ARENA SPORTS</span>
+                <span className="text-destaque">ARENA SPORTS</span>
               </div>
-              <p className="text-xs text-ps-cinza mt-1">{evento.nome}</p>
+              <p className="text-xs text-cinza mt-1">{evento.nome}</p>
             </div>
             <div className="flex-1 grid grid-cols-1 gap-4 overflow-y-auto">
               {Object.entries(grupos)
@@ -185,9 +185,9 @@ export function Sorteio() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: indiceGrupo * 0.15 }}
-                    className="bg-white/5 rounded-xl p-3"
+                    className="bg-white/5 rounded-2xl p-3"
                   >
-                    <div className="text-ps-dourado text-xs font-bold uppercase tracking-wide mb-2">
+                    <div className="text-destaque text-xs font-bold uppercase tracking-wide mb-2">
                       Grupo {grupo}
                     </div>
                     <div className="space-y-1">
@@ -197,7 +197,7 @@ export function Sorteio() {
                           initial={{ opacity: 0, x: -8 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: indiceGrupo * 0.15 + indiceTime * 0.08 + 0.1 }}
-                          className="text-white text-sm bg-ps-azul-marinho rounded-md px-3 py-1.5"
+                          className="text-white text-sm bg-cartao-2 rounded-md px-3 py-1.5"
                         >
                           {equipe.nome}
                         </motion.div>
@@ -207,7 +207,7 @@ export function Sorteio() {
                 ))}
             </div>
           </div>
-          <p className="text-center text-xs text-slate-400">
+          <p className="text-center text-xs text-cinza">
             Print ou grave a tela acima para compartilhar o resultado.
           </p>
         </div>

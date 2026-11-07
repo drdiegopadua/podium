@@ -11,8 +11,8 @@ export default defineConfig({
         name: "Arena Sports",
         short_name: "Arena",
         description: "Tecnologia que conecta competicoes",
-        theme_color: "#0A2342",
-        background_color: "#0A2342",
+        theme_color: "#0B0B0C",
+        background_color: "#0B0B0C",
         display: "standalone",
         icons: [
           { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },

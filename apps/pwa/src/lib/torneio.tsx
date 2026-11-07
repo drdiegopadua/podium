@@ -57,14 +57,10 @@ export function TorneioProvider({ children }: { children: ReactNode }) {
     salvar(null);
   }
 
-  // Cores da empresa organizadora viram o tema do app
+  // A cor de destaque da empresa organizadora vira o acento do tema escuro
   useEffect(() => {
-    const raiz = document.documentElement;
-    const primaria = torneio?.empresa?.cor_primaria ?? "#0A2342";
-    const destaque = torneio?.empresa?.cor_secundaria ?? "#D4AF37";
-    raiz.style.setProperty("--cor-primaria", primaria);
-    raiz.style.setProperty("--cor-destaque", destaque);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", primaria);
+    const destaque = torneio?.empresa?.cor_secundaria ?? "#D4FF3A";
+    document.documentElement.style.setProperty("--cor-destaque", destaque);
     document.title = torneio ? `${torneio.nome} · Arena Sports` : "Arena Sports";
   }, [torneio]);
 

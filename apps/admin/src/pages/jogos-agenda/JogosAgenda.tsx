@@ -78,32 +78,32 @@ export function JogosAgenda() {
       <PageHeader title="Jogos & Agenda" subtitle="Agendamento, designacao de arbitros e placares" />
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-700 mb-1">Evento</label>
+        <label className="block text-sm font-medium text-white/80 mb-1">Evento</label>
         <SeletorEvento eventos={eventos} eventoId={eventoId} onChange={setEventoId} />
       </div>
 
       {erro && <p className="text-sm text-ps-vermelho mb-4">{erro}</p>}
-      {carregando && <p className="text-sm text-slate-500">Carregando...</p>}
+      {carregando && <p className="text-sm text-cinza">Carregando...</p>}
 
       {!carregando && eventoId && jogos.length === 0 && (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-cinza">
           Nenhum jogo agendado ainda. Rode o sorteio no evento para gerar os jogos.
         </p>
       )}
 
       <div className="space-y-3">
         {jogos.map((jogo) => (
-          <div key={jogo.id} className="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+          <div key={jogo.id} className="bg-cartao rounded-2xl shadow-sm border border-borda p-4">
             <div className="flex items-center justify-between mb-3">
-              <div className="text-sm font-semibold text-ps-azul-escuro">
+              <div className="text-sm font-semibold text-white">
                 {nomesEquipes[jogo.equipe_a_id] ?? "?"} x {nomesEquipes[jogo.equipe_b_id] ?? "?"}
               </div>
-              {jogo.fase && <span className="text-xs text-ps-dourado font-semibold">{jogo.fase}</span>}
+              {jogo.fase && <span className="text-xs text-destaque font-semibold">{jogo.fase}</span>}
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Data/hora</span>
+                <span className="block text-xs text-cinza mb-1">Data/hora</span>
                 <input
                   type="datetime-local"
                   value={jogo.data_hora ? jogo.data_hora.slice(0, 16) : ""}
@@ -117,7 +117,7 @@ export function JogosAgenda() {
               </label>
 
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Local</span>
+                <span className="block text-xs text-cinza mb-1">Local</span>
                 <input
                   value={jogo.local ?? ""}
                   onChange={(e) => atualizarLocal(jogo.id, { local: e.target.value })}
@@ -126,7 +126,7 @@ export function JogosAgenda() {
               </label>
 
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Arbitro</span>
+                <span className="block text-xs text-cinza mb-1">Arbitro</span>
                 <select
                   value={jogo.arbitro_id ?? ""}
                   onChange={(e) => atualizarLocal(jogo.id, { arbitro_id: e.target.value || null })}
@@ -142,7 +142,7 @@ export function JogosAgenda() {
               </label>
 
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Status</span>
+                <span className="block text-xs text-cinza mb-1">Status</span>
                 <select
                   value={jogo.status}
                   onChange={(e) => atualizarLocal(jogo.id, { status: e.target.value as StatusJogo })}
@@ -157,7 +157,7 @@ export function JogosAgenda() {
               </label>
 
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Placar {nomesEquipes[jogo.equipe_a_id] ?? "A"}</span>
+                <span className="block text-xs text-cinza mb-1">Placar {nomesEquipes[jogo.equipe_a_id] ?? "A"}</span>
                 <input
                   type="number"
                   min={0}
@@ -170,7 +170,7 @@ export function JogosAgenda() {
               </label>
 
               <label className="block">
-                <span className="block text-xs text-slate-500 mb-1">Placar {nomesEquipes[jogo.equipe_b_id] ?? "B"}</span>
+                <span className="block text-xs text-cinza mb-1">Placar {nomesEquipes[jogo.equipe_b_id] ?? "B"}</span>
                 <input
                   type="number"
                   min={0}
@@ -186,7 +186,7 @@ export function JogosAgenda() {
             <button
               onClick={() => salvar(jogo)}
               disabled={salvandoId === jogo.id}
-              className="mt-3 rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-4 py-1.5 text-xs hover:brightness-95 disabled:opacity-60"
+              className="mt-3 rounded-full bg-destaque text-preto font-semibold px-4 py-1.5 text-xs hover:brightness-95 disabled:opacity-60"
             >
               {salvandoId === jogo.id ? "Salvando..." : "Salvar"}
             </button>

@@ -72,38 +72,38 @@ export function Login() {
   }
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-ps-azul-escuro">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-fundo">
       <div className="hidden lg:flex flex-col justify-between p-12 text-white">
         <Marca />
         <div>
           <h1 className="text-4xl font-bold leading-tight">
-            Crie e gerencie seus torneios <span className="text-ps-dourado">em minutos.</span>
+            Crie e gerencie seus torneios <span className="text-destaque">em minutos.</span>
           </h1>
-          <ul className="mt-8 space-y-3 text-ps-cinza">
+          <ul className="mt-8 space-y-3 text-cinza">
             <li>🏆 Qualquer esporte, formato e regra de pontuação</li>
             <li>📱 App PWA para torcedores, atletas e árbitros</li>
             <li>⚡ Placar, súmula e classificação em tempo real</li>
           </ul>
         </div>
-        <p className="text-xs text-ps-cinza">© {new Date().getFullYear()} Arena Sports</p>
+        <p className="text-xs text-cinza">© {new Date().getFullYear()} Arena Sports</p>
       </div>
 
       <div className="flex items-center justify-center p-4">
         <form
           onSubmit={handleSubmit}
-          className="bg-ps-branco rounded-xl shadow-xl w-full max-w-sm p-8 space-y-4"
+          className="bg-cartao rounded-2xl shadow-xl w-full max-w-sm p-8 space-y-4"
         >
           <div className="text-center mb-2 lg:hidden">
             <Marca escura />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-ps-azul-escuro">
+            <h2 className="text-lg font-bold text-white">
               {modo === "entrar" && "Entrar no painel"}
               {modo === "cadastrar" && "Criar conta da empresa"}
               {modo === "recuperar" && "Recuperar senha"}
             </h2>
             {modo === "cadastrar" && (
-              <p className="text-xs text-slate-500 mt-1">Comece grátis e crie seu primeiro torneio.</p>
+              <p className="text-xs text-cinza mt-1">Comece grátis e crie seu primeiro torneio.</p>
             )}
           </div>
 
@@ -153,12 +153,12 @@ export function Login() {
           )}
 
           {erro && <p className="text-sm text-ps-vermelho">{erro}</p>}
-          {aviso && <p className="text-sm text-green-700">{aviso}</p>}
+          {aviso && <p className="text-sm text-destaque">{aviso}</p>}
 
           <button
             type="submit"
             disabled={carregando}
-            className="w-full rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold py-2 text-sm hover:brightness-95 disabled:opacity-60"
+            className="w-full rounded-full bg-destaque text-preto font-semibold py-2 text-sm hover:brightness-95 disabled:opacity-60"
           >
             {carregando
               ? "Aguarde..."
@@ -169,7 +169,7 @@ export function Login() {
                   : "Enviar link"}
           </button>
 
-          <div className="text-xs text-center space-y-1 text-slate-600">
+          <div className="text-xs text-center space-y-1 text-white/80">
             {modo === "entrar" ? (
               <>
                 <button type="button" onClick={() => setModo("cadastrar")} className="underline block w-full">
@@ -194,10 +194,10 @@ export function Login() {
 function Marca({ escura = false }: { escura?: boolean }) {
   return (
     <div>
-      <div className={`text-2xl font-bold tracking-wide ${escura ? "text-ps-azul-escuro" : "text-white"}`}>
-        <span className="text-ps-dourado">ARENA</span> SPORTS
+      <div className={`text-2xl font-bold tracking-wide ${escura ? "text-white" : "text-white"}`}>
+        <span className="text-destaque">ARENA</span> SPORTS
       </div>
-      <p className={`text-xs mt-1 ${escura ? "text-slate-500" : "text-ps-cinza"}`}>Painel do organizador</p>
+      <p className={`text-xs mt-1 ${escura ? "text-cinza" : "text-cinza"}`}>Painel do organizador</p>
     </div>
   );
 }
@@ -205,7 +205,7 @@ function Marca({ escura = false }: { escura?: boolean }) {
 function Campo({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-sm font-medium text-slate-700 mb-1">{label}</span>
+      <span className="block text-sm font-medium text-white/80 mb-1">{label}</span>
       {children}
     </label>
   );

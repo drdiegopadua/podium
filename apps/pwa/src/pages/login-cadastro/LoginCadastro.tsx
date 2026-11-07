@@ -42,13 +42,13 @@ export function LoginCadastro() {
   }
 
   return (
-    <div className="min-h-screen bg-ps-azul-escuro flex items-center justify-center p-6">
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl w-full max-w-sm p-6 space-y-4">
+    <div className="min-h-screen bg-fundo flex items-center justify-center p-6">
+      <form onSubmit={handleSubmit} className="bg-cartao rounded-2xl w-full max-w-sm p-6 space-y-4">
         <div className="text-center">
-          <div className="text-xl font-bold text-ps-azul-escuro">
-            <span className="text-ps-dourado">ARENA SPORTS</span>
+          <div className="text-xl font-bold text-white">
+            <span className="text-destaque">ARENA SPORTS</span>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-cinza mt-1">
             {modo === "login" ? "Entrar na sua conta" : "Criar conta"}
           </p>
         </div>
@@ -93,7 +93,7 @@ export function LoginCadastro() {
         <button
           type="submit"
           disabled={carregando}
-          className="w-full rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold py-2.5 text-sm hover:brightness-95 disabled:opacity-60"
+          className="w-full rounded-full bg-destaque text-preto font-semibold py-3.5 text-sm hover:brightness-95 disabled:opacity-60"
         >
           {carregando ? "Aguarde..." : modo === "login" ? "Entrar" : "Cadastrar"}
         </button>
@@ -101,7 +101,7 @@ export function LoginCadastro() {
         <button
           type="button"
           onClick={() => setModo(modo === "login" ? "cadastro" : "login")}
-          className="w-full text-xs text-ps-azul-marinho underline"
+          className="w-full text-xs text-destaque underline"
         >
           {modo === "login" ? "Nao tem conta? Cadastre-se" : "Ja tem conta? Entrar"}
         </button>

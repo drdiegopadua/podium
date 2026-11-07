@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #0b0b0c;
+  color: #fff;
 }
 
 .input {
-  @apply w-full rounded-lg border border-ps-cinza px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ps-dourado;
+  @apply w-full rounded-xl border border-borda bg-cartao-2 px-3 py-2.5 text-sm text-white placeholder:text-cinza focus:outline-none focus:ring-2 focus:ring-destaque disabled:opacity-60;
 }

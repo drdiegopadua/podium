@@ -2,15 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --cor-destaque: #d4ff3a;
+  color-scheme: dark;
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #0b0b0c;
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .input {
-  @apply w-full rounded-lg border border-ps-cinza px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ps-dourado;
-}
-
-:root {
-  --cor-primaria: #0A2342;
-  --cor-destaque: #D4AF37;
+  @apply w-full rounded-xl border border-borda bg-cartao-2 px-4 py-3 text-sm text-white placeholder:text-cinza focus:outline-none focus:ring-2 focus:ring-destaque;
 }

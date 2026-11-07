@@ -3,7 +3,7 @@ import { Sidebar } from "./Sidebar";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-ps-cinza-claro">
+    <div className="flex min-h-screen bg-fundo">
       <Sidebar />
       <main className="flex-1 p-8">{children}</main>
     </div>

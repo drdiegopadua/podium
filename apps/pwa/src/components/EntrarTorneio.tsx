@@ -11,10 +11,10 @@ export function EntrarTorneio() {
   }
 
   return (
-    <form onSubmit={enviar} className="bg-white rounded-xl shadow-sm border border-slate-100 p-5 space-y-3">
+    <form onSubmit={enviar} className="bg-cartao rounded-2xl shadow-sm border border-borda p-5 space-y-3">
       <div>
-        <h2 className="font-bold text-ps-azul-escuro">Acompanhe um torneio</h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <h2 className="font-bold text-white">Acompanhe um torneio</h2>
+        <p className="text-xs text-cinza mt-1">
           Digite o código do torneio ou escaneie o QR Code divulgado pelo organizador.
         </p>
       </div>
@@ -29,7 +29,7 @@ export function EntrarTorneio() {
       {erro && <p className="text-sm text-ps-vermelho">{erro}</p>}
       <button
         disabled={carregando}
-        className="w-full rounded-lg bg-destaque text-primaria font-semibold py-2 text-sm disabled:opacity-60"
+        className="w-full rounded-full bg-destaque text-preto font-semibold py-3 text-sm disabled:opacity-60"
       >
         {carregando ? "Buscando..." : "Abrir torneio"}
       </button>

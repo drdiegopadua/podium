@@ -85,37 +85,37 @@ export function Atletas() {
       <PageHeader title="Atletas" subtitle="Aprovacao de vinculos de atletas as equipes" />
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-700 mb-1">Evento</label>
+        <label className="block text-sm font-medium text-white/80 mb-1">Evento</label>
         <SeletorEvento eventos={eventos} eventoId={eventoId} onChange={setEventoId} />
       </div>
 
       {erro && <p className="text-sm text-ps-vermelho mb-4">{erro}</p>}
-      {carregando && <p className="text-sm text-slate-500">Carregando...</p>}
+      {carregando && <p className="text-sm text-cinza">Carregando...</p>}
 
       {!carregando && eventoId && atletas.length === 0 && (
-        <p className="text-sm text-slate-500">Nenhum atleta vinculado a equipes deste evento ainda.</p>
+        <p className="text-sm text-cinza">Nenhum atleta vinculado a equipes deste evento ainda.</p>
       )}
 
       {pendentes.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-sm font-semibold text-ps-azul-escuro mb-3">
+          <h2 className="text-sm font-semibold text-white mb-3">
             Pendentes de aprovacao ({pendentes.length})
           </h2>
           <div className="space-y-2">
             {pendentes.map((atleta) => (
               <div
                 key={atleta.id}
-                className="bg-white rounded-lg border border-slate-100 shadow-sm p-4 flex items-center justify-between"
+                className="bg-cartao rounded-lg border border-borda shadow-sm p-4 flex items-center justify-between"
               >
                 <div>
-                  <div className="text-sm font-medium text-ps-azul-escuro">
+                  <div className="text-sm font-medium text-white">
                     #{atleta.numero_camisa ?? "-"} — {atleta.equipe_nome}
                   </div>
-                  <div className="text-xs text-slate-400">{atleta.posicao ?? "posicao nao informada"}</div>
+                  <div className="text-xs text-cinza">{atleta.posicao ?? "posicao nao informada"}</div>
                 </div>
                 <button
                   onClick={() => aprovar(atleta.id)}
-                  className="rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-4 py-1.5 text-sm hover:brightness-95"
+                  className="rounded-full bg-destaque text-preto font-semibold px-4 py-1.5 text-sm hover:brightness-95"
                 >
                   Aprovar
                 </button>
@@ -127,14 +127,14 @@ export function Atletas() {
 
       {aprovados.length > 0 && (
         <div>
-          <h2 className="text-sm font-semibold text-ps-azul-escuro mb-3">Aprovados ({aprovados.length})</h2>
+          <h2 className="text-sm font-semibold text-white mb-3">Aprovados ({aprovados.length})</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {aprovados.map((atleta) => (
-              <div key={atleta.id} className="bg-white rounded-lg border border-slate-100 shadow-sm p-4">
-                <div className="text-sm font-medium text-ps-azul-escuro">
+              <div key={atleta.id} className="bg-cartao rounded-lg border border-borda shadow-sm p-4">
+                <div className="text-sm font-medium text-white">
                   #{atleta.numero_camisa ?? "-"} — {atleta.equipe_nome}
                 </div>
-                <div className="text-xs text-slate-400">{atleta.posicao ?? "posicao nao informada"}</div>
+                <div className="text-xs text-cinza">{atleta.posicao ?? "posicao nao informada"}</div>
               </div>
             ))}
           </div>

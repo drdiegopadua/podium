@@ -32,32 +32,32 @@ export function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ps-azul-escuro p-4">
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-xl w-full max-w-md p-8 space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-fundo p-4">
+      <form onSubmit={handleSubmit} className="bg-cartao rounded-2xl shadow-xl w-full max-w-md p-8 space-y-4">
         <div>
-          <h1 className="text-lg font-bold text-ps-azul-escuro">Cadastre sua empresa</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-lg font-bold text-white">Cadastre sua empresa</h1>
+          <p className="text-sm text-cinza mt-1">
             Sua conta ainda não está ligada a nenhuma empresa. Crie a sua agora — ou peça ao
             responsável para te adicionar à equipe dele.
           </p>
         </div>
         <label className="block">
-          <span className="block text-sm font-medium text-slate-700 mb-1">Seu nome</span>
+          <span className="block text-sm font-medium text-white/80 mb-1">Seu nome</span>
           <input required value={nome} onChange={(e) => setNome(e.target.value)} className="input" />
         </label>
         <label className="block">
-          <span className="block text-sm font-medium text-slate-700 mb-1">Nome da empresa / organização</span>
+          <span className="block text-sm font-medium text-white/80 mb-1">Nome da empresa / organização</span>
           <input required value={empresa} onChange={(e) => setEmpresa(e.target.value)} className="input" />
         </label>
         {erro && <p className="text-sm text-ps-vermelho">{erro}</p>}
         <div className="flex items-center justify-between">
-          <button type="button" onClick={sair} className="text-xs underline text-slate-500">
+          <button type="button" onClick={sair} className="text-xs underline text-cinza">
             Sair
           </button>
           <button
             type="submit"
             disabled={salvando}
-            className="rounded-lg bg-ps-dourado text-ps-azul-escuro font-semibold px-5 py-2 text-sm disabled:opacity-60"
+            className="rounded-full bg-destaque text-preto font-semibold px-5 py-2 text-sm disabled:opacity-60"
           >
             {salvando ? "Criando..." : "Criar empresa"}
           </button>
