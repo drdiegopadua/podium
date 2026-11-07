@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
   }
 
   return new Response(
-    JSON.stringify({ equipe: data, link_convite: `https://podium-pwa.vercel.app/vincular/${codigo}` }),
+    JSON.stringify({ equipe: data, link_convite: `https://arenasportsbr.vercel.app/vincular/${codigo}` }),
     { headers: { ...corsHeaders, "Content-Type": "application/json" } }
   );
 });

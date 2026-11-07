@@ -4,7 +4,7 @@ import { PageHeader } from "../../components/PageHeader";
 import { useEventosDaEmpresa } from "../../components/SeletorEvento";
 import { FORMATOS_EVENTO } from "@arena/shared";
 
-const URL_PWA = (import.meta.env.VITE_PWA_URL as string | undefined) ?? "https://podium-pwa.vercel.app";
+const URL_PWA = (import.meta.env.VITE_PWA_URL as string | undefined) ?? "https://arenasportsbr.vercel.app";
 
 export function ListaEventos() {
   const { eventos, carregando } = useEventosDaEmpresa();
