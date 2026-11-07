@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useSessao } from "../contexts/SessaoContext";
+import { URL_PWA } from "../lib/config";
 
 const links = [
   { to: "/", label: "Dashboard" },
@@ -63,6 +64,20 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
+      <div className="px-3 pb-4">
+        <a
+          href={URL_PWA}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-between rounded-xl border border-borda bg-cartao-2 px-4 py-3 text-sm hover:border-destaque"
+        >
+          <span>
+            <span className="block font-semibold text-white">📱 App dos torcedores</span>
+            <span className="block text-xs text-cinza truncate">{URL_PWA.replace(/^https?:\/\//, "")}</span>
+          </span>
+          <span className="text-destaque">↗</span>
+        </a>
+      </div>
       <div className="px-6 py-4 border-t border-white/10 text-xs">
         <div className="truncate text-white">{perfil?.nome ?? sessao?.user.email}</div>
         <button onClick={sair} className="mt-1 text-cinza underline hover:text-white">

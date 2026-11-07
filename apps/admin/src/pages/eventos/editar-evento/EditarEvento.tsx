@@ -1,3 +1,4 @@
+import { URL_PWA } from "../../../lib/config";
 import { FormEvent, useEffect, useState, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FORMATOS_EVENTO, type Evento, type StatusEvento } from "@arena/shared";
@@ -6,8 +7,6 @@ import { PageHeader } from "../../../components/PageHeader";
 import { CampoImagem } from "../../../components/CampoImagem";
 import { supabase } from "../../../lib/supabaseClient";
 import { enviarImagem } from "../../../lib/upload";
-
-const URL_PWA = (import.meta.env.VITE_PWA_URL as string | undefined) ?? "https://arenasportsbr.vercel.app";
 
 const STATUS: { valor: StatusEvento; rotulo: string }[] = [
   { valor: "rascunho", rotulo: "Rascunho (não aparece no app)" },

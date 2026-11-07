@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "../../components/Layout";
 import { PageHeader } from "../../components/PageHeader";
 import { supabase } from "../../lib/supabaseClient";
+import { URL_PWA, linkTorneioNoApp } from "../../lib/config";
 import { useSessao } from "../../contexts/SessaoContext";
 import { useEventosDaEmpresa } from "../../components/SeletorEvento";
 
@@ -66,6 +67,60 @@ export function Dashboard() {
       >
         + Criar novo torneio
       </Link>
+
+      <section className="mt-8 max-w-3xl bg-cartao rounded-2xl border border-borda p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 className="font-bold text-white">📱 App dos torcedores e atletas</h2>
+            <p className="text-sm text-cinza mt-1">
+              Divulgue o link. Quem abrir pode instalar o app no celular e acompanhar jogos e classificação.
+            </p>
+          </div>
+          <a
+            href={URL_PWA}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-cartao-2 border border-borda px-4 py-2 text-sm font-semibold hover:border-destaque"
+          >
+            Abrir app ↗
+          </a>
+        </div>
+        <LinhaLink rotulo="Link do app" url={URL_PWA} />
+        {eventos.slice(0, 5).map((e) => (
+          <LinhaLink key={e.id} rotulo={e.nome} url={linkTorneioNoApp(e.codigo_evento)} />
+        ))}
+        {eventos.length > 0 && (
+          <p className="text-xs text-cinza mt-3">
+            O link de cada torneio abre o app direto nele, sem precisar digitar o código.
+          </p>
+        )}
+      </section>
     </Layout>
+  );
+}
+
+function LinhaLink({ rotulo, url }: { rotulo: string; url: string }) {
+  const [copiado, setCopiado] = useState(false);
+  async function copiar() {
+    await navigator.clipboard.writeText(url);
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 1500);
+  }
+  return (
+    <div className="mt-4 flex items-center gap-3">
+      <div className="min-w-0 flex-1">
+        <div className="text-xs text-cinza truncate">{rotulo}</div>
+        <a href={url} target="_blank" rel="noreferrer" className="block text-sm text-destaque truncate hover:underline">
+          {url.replace(/^https?:\/\//, "")}
+        </a>
+      </div>
+      <button
+        type="button"
+        onClick={copiar}
+        className="shrink-0 rounded-full border border-borda px-3 py-1.5 text-xs font-semibold hover:border-destaque"
+      >
+        {copiado ? "Copiado!" : "Copiar"}
+      </button>
+    </div>
   );
 }
