@@ -33,6 +33,7 @@ export function Sorteio() {
         setErro("Evento nao encontrado.");
       } else {
         setEvento(eventoData);
+        setQtdGrupos(Math.max(1, Number(eventoData.regras?.qtd_grupos) || 1));
         setEquipes(equipesData ?? []);
         setOrdemEmbaralhada(equipesData ?? []);
       }
@@ -63,10 +64,18 @@ export function Sorteio() {
     }
 
     try {
-      const { error } = await supabase.functions.invoke("realizar-sorteio", {
-        body: { evento_id: id, qtd_grupos: qtdGrupos },
-      });
-      if (error) throw error;
+      // Sorteio feito no proprio painel: embaralha e distribui as equipes nos grupos.
+      // Os jogos sao gerados depois, em "Tabela de jogos".
+      const letras = "ABCDEFGHIJKLMNOP".slice(0, Math.max(1, qtdGrupos)).split("");
+      const sorteadas = embaralharVisualmente(equipes);
+      const resultados = await Promise.all(
+        sorteadas.map((equipe, i) =>
+          supabase.from("equipes").update({ posicao_grupo: letras[i % letras.length] }).eq("id", equipe.id)
+        )
+      );
+      const falha = resultados.find((r) => r.error);
+      if (falha?.error) throw falha.error;
+      await supabase.from("eventos").update({ status: "sorteio_realizado" }).eq("id", id);
 
       const { data: equipesAtualizadas, error: erroEquipes } = await supabase
         .from("equipes")

@@ -93,6 +93,8 @@ export interface RegrasEvento {
   classificados_playoff?: number | null;
   disputa_terceiro: boolean;
   criterios_desempate: CriterioDesempate[];
+  /** Amarelos acumulados que suspendem o jogador por 1 jogo (0 = desligado) */
+  amarelos_suspensao?: number;
   observacoes?: string | null;
 }
 
@@ -107,6 +109,7 @@ export const REGRAS_PADRAO: RegrasEvento = {
   classificados_playoff: 4,
   disputa_terceiro: true,
   criterios_desempate: ["vitorias", "saldo", "pontos_pro", "confronto_direto"],
+  amarelos_suspensao: 3,
   observacoes: "",
 };
 export type SorteioTipo = "manual" | "automatico";
@@ -153,7 +156,8 @@ export interface Equipe {
 
 export interface Atleta {
   id: string;
-  perfil_id: string;
+  perfil_id?: string | null;
+  nome?: string | null;
   equipe_id: string;
   numero_camisa?: number | null;
   posicao?: string | null;
@@ -170,15 +174,44 @@ export interface Jogo {
   id: string;
   evento_id: string;
   fase?: string | null;
-  equipe_a_id: string;
-  equipe_b_id: string;
+  equipe_a_id: string | null;
+  equipe_b_id: string | null;
   local?: string | null;
   data_hora?: string | null;
   status: StatusJogo;
   arbitro_id?: string | null;
   placar_a?: number | null;
   placar_b?: number | null;
+  etapa?: EtapaJogo;
+  rodada?: number | null;
+  grupo?: string | null;
+  ordem?: number | null;
+  proximo_jogo_id?: string | null;
+  proximo_lado?: "a" | "b" | null;
+  perdedor_jogo_id?: string | null;
+  perdedor_lado?: "a" | "b" | null;
+  penaltis_a?: number | null;
+  penaltis_b?: number | null;
+  vencedor_id?: string | null;
+  wo_equipe_id?: string | null;
   criado_em: string;
+}
+
+export type EtapaJogo = "classificatoria" | "mata_mata";
+
+export type TipoLance = "gol" | "gol_contra" | "assistencia" | "amarelo" | "vermelho";
+
+export interface Lance {
+  id: string;
+  jogo_id: string;
+  evento_id: string;
+  equipe_id?: string | null;
+  atleta_id?: string | null;
+  jogador_nome?: string | null;
+  tipo: TipoLance;
+  quantidade: number;
+  minuto?: string | null;
+  criado_em?: string;
 }
 
 export type StatusSumula = "aberta" | "em_andamento" | "fechada";
@@ -207,11 +240,19 @@ export interface Classificacao {
   equipe_id: string;
   grupo?: string | null;
   pontos: number;
+  jogos?: number;
   vitorias: number;
+  empates?: number;
   derrotas: number;
+  gols_pro?: number;
+  gols_contra?: number;
   saldo: number;
+  cartoes_amarelos?: number;
+  cartoes_vermelhos?: number;
   atualizado_em: string;
 }
+
+export * from "../campeonato";
 
 export * from "../permissions";
 export * from "../sumula-schemas";

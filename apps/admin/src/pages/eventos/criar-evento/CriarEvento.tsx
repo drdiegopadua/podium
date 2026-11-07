@@ -381,6 +381,13 @@ export function CriarEvento() {
             </div>
           </div>
 
+          <Campo label="Suspensão automática: amarelos acumulados (0 = não suspende)">
+            <NumeroInput
+              valor={regras.amarelos_suspensao ?? 3}
+              onChange={(v) => atualizarRegra("amarelos_suspensao", v)}
+            />
+          </Campo>
+
           <Campo label="Regulamento / observações">
             <textarea
               rows={3}

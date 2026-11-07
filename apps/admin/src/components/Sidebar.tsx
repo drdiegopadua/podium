@@ -7,8 +7,7 @@ const links = [
   { to: "/eventos", label: "Torneios" },
   { to: "/equipes", label: "Equipes" },
   { to: "/atletas", label: "Atletas" },
-  { to: "/jogos-agenda", label: "Jogos & Agenda" },
-  { to: "/sumulas", label: "Súmulas" },
+  { to: "/jogos-agenda", label: "Tabela de jogos" },
   { to: "/classificacao", label: "Classificação" },
   { to: "/empresa", label: "Minha empresa" },
 ];

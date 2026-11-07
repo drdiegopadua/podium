@@ -7,6 +7,8 @@ import { Jogos } from "./pages/jogos/Jogos";
 import { Classificacao } from "./pages/classificacao/Classificacao";
 import { SumulaGenerica } from "./pages/sumula/generico/SumulaGenerica";
 import { InfoEvento } from "./pages/info-evento/InfoEvento";
+import { JogoDetalhe } from "./pages/jogo/JogoDetalhe";
+import { Estatisticas } from "./pages/estatisticas/Estatisticas";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
       <Route path="/jogos" element={<Jogos />} />
       <Route path="/classificacao" element={<Classificacao />} />
       <Route path="/sumula/:jogoId" element={<SumulaGenerica />} />
+      <Route path="/jogo/:jogoId" element={<JogoDetalhe />} />
+      <Route path="/estatisticas" element={<Estatisticas />} />
       <Route path="/e/:codigoEvento" element={<InfoEvento />} />
       <Route path="/evento" element={<InfoEvento />} />
     </Routes>

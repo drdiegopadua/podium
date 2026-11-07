@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { IconeBarras, IconeCalendario, IconeInicio, IconeTrofeu } from "./Icones";
+import { IconeBarras, IconeCalendario, IconeEstrela, IconeInicio, IconeTrofeu } from "./Icones";
 
 const itens = [
   { to: "/", label: "Início", Icone: IconeInicio },
   { to: "/jogos", label: "Jogos", Icone: IconeCalendario },
   { to: "/classificacao", label: "Tabela", Icone: IconeBarras },
+  { to: "/estatisticas", label: "Stats", Icone: IconeEstrela },
   { to: "/evento", label: "Torneio", Icone: IconeTrofeu },
 ];
 
@@ -18,7 +19,7 @@ export function BottomNav() {
             to={to}
             end={to === "/"}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-1 text-[11px] font-medium px-3 ${isActive ? "text-destaque" : "text-cinza"}`
+              `flex flex-col items-center gap-1 text-[11px] font-medium px-2 ${isActive ? "text-destaque" : "text-cinza"}`
             }
           >
             <Icone tamanho={22} />

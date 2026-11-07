@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "../lib/supabaseClient";
 import { FORMATOS_EVENTO } from "@arena/shared";
 import { PwaLayout } from "../components/PwaLayout";
 import { Escudo } from "../components/Escudo";
@@ -57,6 +59,14 @@ function BoasVindas() {
 /* ---------- Com torneio ---------- */
 function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
   const { jogos, aoVivo, proximos, encerrados } = useJogos(torneio.id);
+  const [qtdEquipes, setQtdEquipes] = useState<number | null>(null);
+  useEffect(() => {
+    supabase
+      .from("equipes")
+      .select("id", { count: "exact", head: true })
+      .eq("evento_id", torneio.id)
+      .then(({ count }) => setQtdEquipes(count ?? 0));
+  }, [torneio.id]);
   const total = jogos.length;
   const concluidos = encerrados.length;
   const pct = total ? Math.round((concluidos / total) * 100) : 0;
@@ -114,7 +124,7 @@ function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
           <Medidor pct={pct} />
           <div className="grid grid-cols-3 divide-x divide-borda text-center">
             <Estat Icone={IconeCalendario} rotulo="Jogos" valor={total} sub={`${concluidos} realizados`} />
-            <Estat Icone={IconePessoas} rotulo="Equipes" valor={torneio.qtd_equipes} sub="inscritas" />
+            <Estat Icone={IconePessoas} rotulo="Equipes" valor={qtdEquipes ?? 0} sub={`de ${torneio.qtd_equipes} vagas`} />
             <Estat Icone={IconeFogo} rotulo="Ao vivo" valor={aoVivo.length} sub="agora" />
           </div>
         </div>
@@ -136,7 +146,7 @@ function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
             {encerrados.slice(0, 4).map((j) => (
               <li key={j.id}>
                 <Link
-                  to={`/sumula/${j.id}`}
+                  to={`/jogo/${j.id}`}
                   className="flex items-center gap-3 rounded-2xl bg-cartao border border-borda p-3"
                 >
                   <div className="relative w-12 h-11 shrink-0">
@@ -168,7 +178,7 @@ function CartaoJogo({ jogo, principal }: { jogo: JogoComEquipes; principal: bool
   const aoVivo = jogo.status === "em_andamento";
   const cor = principal ? "bg-destaque text-preto" : "bg-cartao border border-borda text-white";
   return (
-    <Link to={`/sumula/${jogo.id}`} className={`snap-start shrink-0 w-[78%] rounded-3xl p-5 flex flex-col ${cor}`}>
+    <Link to={`/jogo/${jogo.id}`} className={`snap-start shrink-0 w-[78%] rounded-3xl p-5 flex flex-col ${cor}`}>
       <div className="flex items-center justify-between text-xs font-medium">
         <span className="opacity-70">{jogo.fase ?? "Próximo jogo"}</span>
         {aoVivo ? (

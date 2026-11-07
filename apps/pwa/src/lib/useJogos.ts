@@ -23,13 +23,19 @@ export function useJogos(eventoId: string | undefined) {
         .eq("evento_id", eventoId)
         .order("data_hora", { ascending: true, nullsFirst: false })
         .then(({ data }) => {
-          setJogos((data as JogoComEquipes[]) ?? []);
+          const lista = ((data as JogoComEquipes[]) ?? []).sort(
+            (a, b) =>
+              (a.data_hora ?? "9999").localeCompare(b.data_hora ?? "9999") ||
+              (a.rodada ?? 0) - (b.rodada ?? 0) ||
+              (a.ordem ?? 0) - (b.ordem ?? 0)
+          );
+          setJogos(lista);
           setCarregando(false);
         });
 
     carregar();
     const canal = supabase
-      .channel(`jogos-${eventoId}`)
+      .channel(`jogos-${eventoId}-${crypto.randomUUID()}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "jogos", filter: `evento_id=eq.${eventoId}` }, () =>
         carregar()
       )

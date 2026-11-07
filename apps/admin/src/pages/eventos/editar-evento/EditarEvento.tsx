@@ -1,7 +1,7 @@
 import { URL_PWA } from "../../../lib/config";
 import { FormEvent, useEffect, useState, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FORMATOS_EVENTO, type Evento, type StatusEvento } from "@arena/shared";
+import { FORMATOS_EVENTO, type Esporte, type Evento, type StatusEvento } from "@arena/shared";
 import { Layout } from "../../../components/Layout";
 import { PageHeader } from "../../../components/PageHeader";
 import { CampoImagem } from "../../../components/CampoImagem";
@@ -27,7 +27,9 @@ export function EditarEvento() {
     data_inicio: "",
     data_fim: "",
     status: "inscricoes_abertas" as StatusEvento,
+    esporte_id: "",
   });
+  const [esportes, setEsportes] = useState<Esporte[]>([]);
   const [logo, setLogo] = useState<File | null>(null);
   const [removerLogo, setRemoverLogo] = useState(false);
   const [salvando, setSalvando] = useState(false);
@@ -53,8 +55,14 @@ export function EditarEvento() {
           data_inicio: e.data_inicio,
           data_fim: e.data_fim ?? "",
           status: e.status,
+          esporte_id: e.esporte_id ?? "",
         });
       });
+    supabase
+      .from("esportes")
+      .select("*")
+      .order("nome")
+      .then(({ data }) => setEsportes((data as Esporte[]) ?? []));
     supabase
       .from("equipes")
       .select("id", { count: "exact", head: true })
@@ -84,6 +92,7 @@ export function EditarEvento() {
           data_inicio: form.data_inicio,
           data_fim: form.data_fim || null,
           status: form.status,
+          esporte_id: form.esporte_id || null,
           logo_url,
         })
         .eq("id", evento.id)
@@ -138,6 +147,15 @@ export function EditarEvento() {
           </Campo>
           <Campo label="Descrição">
             <textarea rows={2} value={form.descricao} onChange={(e) => atualizar("descricao", e.target.value)} className="input" />
+          </Campo>
+          <Campo label="Esporte">
+            <select value={form.esporte_id} onChange={(e) => atualizar("esporte_id", e.target.value)} className="input">
+              {esportes.map((es) => (
+                <option key={es.id} value={es.id}>
+                  {es.nome}
+                </option>
+              ))}
+            </select>
           </Campo>
           <div className="grid sm:grid-cols-2 gap-4">
             <Campo label="Cidade">

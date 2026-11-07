@@ -63,9 +63,25 @@ export function Jogos() {
         )}
 
         <div className="space-y-3">
-          {lista.map((j) => (
-            <CartaoJogo key={j.id} jogo={j} />
-          ))}
+          {lista.map((j, i) => {
+            const titulo = j.etapa === "mata_mata" ? j.fase : j.rodada ? `Rodada ${j.rodada}` : null;
+            const anterior = i > 0 ? lista[i - 1] : null;
+            const tituloAnterior = anterior
+              ? anterior.etapa === "mata_mata"
+                ? anterior.fase
+                : anterior.rodada
+                  ? `Rodada ${anterior.rodada}`
+                  : null
+              : null;
+            return (
+              <div key={j.id} className="space-y-3">
+                {titulo && titulo !== tituloAnterior && (
+                  <h2 className="pt-2 text-xs font-semibold uppercase tracking-wide text-cinza">{titulo}</h2>
+                )}
+                <CartaoJogo jogo={j} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </PwaLayout>
@@ -77,7 +93,7 @@ function CartaoJogo({ jogo }: { jogo: JogoComEquipes }) {
   const mostrar = jogo.status !== "agendado";
   return (
     <Link
-      to={`/sumula/${jogo.id}`}
+      to={`/jogo/${jogo.id}`}
       className={`block rounded-2xl p-4 border bg-cartao ${aoVivo ? "border-destaque" : "border-borda"}`}
     >
       <div className="flex justify-between gap-3 text-xs text-cinza mb-3">
