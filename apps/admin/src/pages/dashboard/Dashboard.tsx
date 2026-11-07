@@ -86,6 +86,9 @@ export function Dashboard() {
           </a>
         </div>
         <LinhaLink rotulo="Link do app" url={URL_PWA} />
+        {empresaAtual?.slug && (
+          <LinhaLink rotulo="Sua página de organizador (todos os campeonatos)" url={`${URL_PWA}/o/${empresaAtual.slug}`} />
+        )}
         {eventos.slice(0, 5).map((e) => (
           <LinhaLink key={e.id} rotulo={e.nome} url={linkTorneioNoApp(e.codigo_evento)} />
         ))}

@@ -15,6 +15,9 @@ import { JogosAgenda } from "./pages/jogos-agenda/JogosAgenda";
 import { Sumulas } from "./pages/sumulas/Sumulas";
 import { Classificacao } from "./pages/classificacao/Classificacao";
 import { MinhaEmpresa } from "./pages/empresa/MinhaEmpresa";
+import { Artes } from "./pages/divulgacao/Artes";
+import { Mural } from "./pages/divulgacao/Mural";
+import { Patrocinadores } from "./pages/divulgacao/Patrocinadores";
 
 const protegida = (el: ReactNode) => <RotaProtegida>{el}</RotaProtegida>;
 
@@ -35,6 +38,9 @@ export default function App() {
       <Route path="/jogos-agenda" element={protegida(<JogosAgenda />)} />
       <Route path="/sumulas" element={protegida(<Sumulas />)} />
       <Route path="/classificacao" element={protegida(<Classificacao />)} />
+      <Route path="/artes" element={protegida(<Artes />)} />
+      <Route path="/mural" element={protegida(<Mural />)} />
+      <Route path="/patrocinadores" element={protegida(<Patrocinadores />)} />
     </Routes>
   );
 }

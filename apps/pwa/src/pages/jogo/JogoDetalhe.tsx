@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { Lance } from "@arena/shared";
 import { PwaLayout } from "../../components/PwaLayout";
+import { FaixaPatrocinadores } from "../../components/Patrocinadores";
 import { Escudo } from "../../components/Escudo";
 import { IconeVoltar } from "../../components/Icones";
 import { supabase } from "../../lib/supabaseClient";
@@ -161,6 +162,7 @@ export function JogoDetalhe() {
           </p>
         )}
       </div>
+      <FaixaPatrocinadores className="mt-6" />
     </PwaLayout>
   );
 }

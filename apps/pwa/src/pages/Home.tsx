@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { FORMATOS_EVENTO } from "@arena/shared";
 import { PwaLayout } from "../components/PwaLayout";
+import { FaixaPatrocinadores } from "../components/Patrocinadores";
+import { Post } from "./mural/Mural";
+import { usePublicacoes } from "../lib/divulgacao";
 import { Escudo } from "../components/Escudo";
 import { EntrarTorneio } from "../components/EntrarTorneio";
 import { useTorneio, type TorneioCompleto } from "../lib/torneio";
@@ -60,6 +63,7 @@ function BoasVindas() {
 function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
   const { jogos, aoVivo, proximos, encerrados } = useJogos(torneio.id);
   const [qtdEquipes, setQtdEquipes] = useState<number | null>(null);
+  const { posts } = usePublicacoes(torneio.id, 3);
   useEffect(() => {
     supabase
       .from("equipes")
@@ -130,6 +134,24 @@ function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
         </div>
       </section>
 
+      {posts.length > 0 && (
+        <section className="px-5">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold">Mural do campeonato</h2>
+            <Link to="/mural" className="text-xs font-semibold text-destaque">
+              Ver tudo
+            </Link>
+          </div>
+          <div className="space-y-3">
+            {posts.map((p) => (
+              <Link key={p.id} to="/mural" className="block">
+                <Post post={p} compacto />
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="px-5">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-semibold">Resultados recentes</h2>
@@ -170,6 +192,8 @@ function PainelTorneio({ torneio }: { torneio: TorneioCompleto }) {
           </ul>
         )}
       </section>
+
+      <FaixaPatrocinadores />
     </div>
   );
 }

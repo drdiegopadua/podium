@@ -5,7 +5,7 @@ import { supabase } from "./supabaseClient";
 const CHAVE = "arena.torneio";
 
 export interface TorneioCompleto extends Evento {
-  empresa: Pick<Empresa, "id" | "nome" | "logo_url" | "cor_primaria" | "cor_secundaria"> | null;
+  empresa: Pick<Empresa, "id" | "nome" | "slug" | "logo_url" | "cor_primaria" | "cor_secundaria"> | null;
   esporte: Pick<Esporte, "id" | "nome"> | null;
 }
 
@@ -32,7 +32,7 @@ export function TorneioProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase
       .from("eventos")
       .select(
-        "*, empresa:empresas(id, nome, logo_url, cor_primaria, cor_secundaria), esporte:esportes(id, nome)"
+        "*, empresa:empresas(id, nome, slug, logo_url, cor_primaria, cor_secundaria), esporte:esportes(id, nome)"
       )
       .eq("codigo_evento", limpo)
       .maybeSingle();

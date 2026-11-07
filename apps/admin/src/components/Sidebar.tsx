@@ -9,6 +9,9 @@ const links = [
   { to: "/atletas", label: "Atletas" },
   { to: "/jogos-agenda", label: "Tabela de jogos" },
   { to: "/classificacao", label: "Classificação" },
+  { to: "/artes", label: "Artes para redes" },
+  { to: "/mural", label: "Mural" },
+  { to: "/patrocinadores", label: "Patrocinadores" },
   { to: "/empresa", label: "Minha empresa" },
 ];
 

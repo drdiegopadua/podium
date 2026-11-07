@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CRITERIOS_DESEMPATE, FORMATOS_EVENTO } from "@arena/shared";
 import { PwaLayout } from "../../components/PwaLayout";
 import { EntrarTorneio } from "../../components/EntrarTorneio";
@@ -8,7 +8,7 @@ import { useTorneio } from "../../lib/torneio";
 export function InfoEvento() {
   const { codigoEvento } = useParams();
   const navigate = useNavigate();
-  const { torneio, carregando, abrir } = useTorneio();
+  const { torneio, carregando, abrir, esquecer } = useTorneio();
 
   // Link/QR Code: /e/CODIGO abre o torneio e leva para a tela inicial dele
   useEffect(() => {
@@ -77,6 +77,25 @@ export function InfoEvento() {
             <p className="text-sm text-white/80 whitespace-pre-line">{r.observacoes}</p>
           </Cartao>
         )}
+
+        {torneio.empresa?.slug && (
+          <Link
+            to={`/o/${torneio.empresa.slug}`}
+            className="block rounded-2xl bg-cartao border border-borda p-4 text-sm font-semibold"
+          >
+            Ver todos os campeonatos de {torneio.empresa.nome} ›
+          </Link>
+        )}
+
+        <button
+          onClick={() => {
+            esquecer();
+            navigate("/");
+          }}
+          className="w-full rounded-full border border-borda py-3 text-sm font-semibold"
+        >
+          Trocar de campeonato
+        </button>
 
         <p className="text-center text-xs text-cinza">
           Código do torneio: <span className="font-mono">{torneio.codigo_evento}</span>
